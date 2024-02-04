@@ -1,7 +1,9 @@
-import { clientID, clientSecret, githubCORSProxy, githubTokenURL } from "../constURLs";
+import { githubCORSProxy, githubFullTokenURL } from "../constURLs";
 
-export const getTokenFromCode = (code: string | null) => {
-  const apiURL = encodeURIComponent(`${githubTokenURL}?client_id=${clientID}&client_secret=${clientSecret}&code=${code}`);
+export const getTokenFromCode = async (code?: string | null, refreshToken?: string | null) => {
+  const codeURL = `${githubFullTokenURL}&code=${code}`;
+  const refreshURL = `${githubFullTokenURL}&grant_type=refresh_token&refresh_token=${refreshToken}`
+  const apiURL = encodeURIComponent(code ? codeURL : refreshURL);
   const url = `${githubCORSProxy}/?${apiURL}`;
   return fetch(url, {
     method: 'POST',

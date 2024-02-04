@@ -13,11 +13,6 @@ const Homepage = () => {
     loading,
     error
   } : apiRespType = useGetPublicGists({page});
-  console.log('HP1');
-  console.log('data', data);
-  console.log('loading', loading);
-  console.log('error', error);
-
 
   const pageChange = (next: boolean) => {
     setPage(prev => next ? prev + 1 : prev - 1)
