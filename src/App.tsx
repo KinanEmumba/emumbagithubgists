@@ -4,16 +4,34 @@ import Button from '@mui/material/Button';
 import Homepage from './pages/Homepage';
 import { homePage } from './constURLs';
 import { getTokenFromCode } from './apis/githubOAuth';
+import { getGithubUser } from './apis/apis';
+import { SharedContextType, TokenType, UserType } from './types';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext<SharedContextType>(null);
 
 function App() {
   const search = window.location.search;
   const params = new URLSearchParams(search);
   const githubCode = params.get('code');
   const [code] = useState(githubCode);
-  const [userToken, setUserToken] = useState(null);
+  const [userToken, setUserToken] = useState<TokenType>(null);
+  const [user, setUser] = useState<UserType>(null);
 
+  
+  useEffect(() => {
+    const getUser = async () => {
+      getGithubUser({token: userToken?.access_token})
+      .then(user => {
+        console.log('user is', user)
+        setUser(user);
+      })
+      .catch(err => {
+        console.log('user err is', err)
+      })
+    }
+    if (userToken) getUser();
+  }, [userToken]);
+  
   useEffect(() => {
     const storedToken = sessionStorage.getItem('githubTokenObject');
     console.log('storedToken', storedToken);
@@ -36,7 +54,7 @@ function App() {
         sessionStorage.removeItem('githubTokenObject');
         setUserToken(null);
       }}> CLEAR TOKEN </Button>}
-      <AuthContext.Provider value={userToken}>
+      <AuthContext.Provider value={{userToken, user}}>
         <Homepage />
       </AuthContext.Provider> 
     </>
