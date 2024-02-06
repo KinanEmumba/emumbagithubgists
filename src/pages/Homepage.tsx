@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Header from '../components/Header';
 import { Button, CircularProgress } from '@mui/material';
-import { AuthContext } from '../App';
 import { useGetPublicGists } from '../apis/apis';
 import { ApiRespType } from '../types';
 
 const Homepage = () => {
-  const contextValue = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const {
     data,
@@ -20,7 +18,7 @@ const Homepage = () => {
   
   return (
     <>
-      <Header user={contextValue?.user}/>
+      <Header />
       <div className={'innerView'}>
         <h1>Page number {page}</h1>
         <Button variant="contained" onClick={() => pageChange(false)} disabled={page === 1}>

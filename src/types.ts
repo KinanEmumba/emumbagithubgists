@@ -31,9 +31,11 @@ export type UserType = null | {
   avatar_url?: string,
   name?: string,
   email?: string,
+  login?: string,
 };
 
 export type SharedContextType = null | {
   user?: UserType,
   userToken?: TokenType,
+  signout: () => void,
 };

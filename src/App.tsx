@@ -22,7 +22,6 @@ function App() {
     const getUser = async () => {
       getGithubUser({token: userToken?.access_token})
       .then((user: UserType) => {
-        // console.log('user is', user)
         setUser(user);
       })
       .catch((err: ApiResponseErrorType) => {
@@ -48,15 +47,9 @@ function App() {
   }, [code]);
 
   return (
-    <>
-      {userToken && <Button variant="contained" onClick={() => {
-        sessionStorage.removeItem('githubTokenObject');
-        setUserToken(null);
-      }}> CLEAR TOKEN </Button>}
-      <AuthContext.Provider value={{userToken, user}}>
-        <Homepage />
-      </AuthContext.Provider> 
-    </>
+    <AuthContext.Provider value={{userToken, user}}>
+      <Homepage />
+    </AuthContext.Provider>
   )
 }
 
