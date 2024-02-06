@@ -32,6 +32,7 @@ export type UserType = null | {
   name?: string,
   email?: string,
   login?: string,
+  html_url?: string,
 };
 
 export type SharedContextType = null | {
