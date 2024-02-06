@@ -3,9 +3,9 @@ import './App.css'
 import Button from '@mui/material/Button';
 import Homepage from './pages/Homepage';
 import { homePage } from './constURLs';
-import { getTokenFromCode } from './apis/githubOAuth';
+import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
-import { SharedContextType, TokenType, UserType } from './types';
+import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
 
 export const AuthContext = createContext<SharedContextType>(null);
 
@@ -21,11 +21,11 @@ function App() {
   useEffect(() => {
     const getUser = async () => {
       getGithubUser({token: userToken?.access_token})
-      .then(user => {
-        console.log('user is', user)
+      .then((user: UserType) => {
+        // console.log('user is', user)
         setUser(user);
       })
-      .catch(err => {
+      .catch((err: ApiResponseErrorType) => {
         console.log('user err is', err)
       })
     }
@@ -40,9 +40,8 @@ function App() {
 
   useEffect(() => {
     const getToken = async () => {
-      const token = await getTokenFromCode(code);
+      const token = await getTokenAPI({code});
       console.log('got token', token);
-      sessionStorage.setItem('githubTokenObject', JSON.stringify(token));
       window.location.replace(homePage);
     }
     if (code) getToken();
