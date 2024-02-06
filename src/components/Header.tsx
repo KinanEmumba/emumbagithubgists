@@ -4,6 +4,7 @@ import './Header.css';
 import SearchBox from './SearchBox';
 import UserAvatar from './UserAvatar';
 import { AuthContext } from '../App';
+import { CircularProgress } from '@mui/material';
 
 const LoginButton = () => {
 return (
@@ -18,19 +19,23 @@ return (
 );
 }
 
-const Header = () => {
+const Header = ({
+  loading
+} : {
+  loading: boolean
+}) => {
   const contextValue = useContext(AuthContext);
   return (
     <>
       <div className={'main'}>
         <span className={'logoText'}>Emumba</span>
-        <div className='rightArea'>
+        {loading ? <CircularProgress /> : <div className='rightArea'>
           <SearchBox />
           {contextValue?.user ?
-            <UserAvatar user={contextValue?.user} signout={contextValue?.signout}/> :
+            <UserAvatar /> :
             <LoginButton />
           }
-        </div>
+        </div>}
       </div>
     </>
   )

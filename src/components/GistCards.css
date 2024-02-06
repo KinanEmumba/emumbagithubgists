@@ -1,0 +1,13 @@
+.fullContainer {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.innerContainer {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

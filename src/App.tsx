@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import './App.css'
-import Button from '@mui/material/Button';
 import Homepage from './pages/Homepage';
 import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
 import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 export const AuthContext = createContext<SharedContextType>(null);
 
@@ -17,6 +17,10 @@ function App() {
   const [userToken, setUserToken] = useState<TokenType>(null);
   const [user, setUser] = useState<UserType>(null);
 
+  const signout = () => {
+    sessionStorage.removeItem('githubTokenObject');
+    setUserToken(null);
+  }
   
   useEffect(() => {
     const getUser = async () => {
@@ -46,9 +50,22 @@ function App() {
     if (code) getToken();
   }, [code]);
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#5acba1',
+      },
+      secondary: {
+        main: '#ffffff',
+      },
+    },
+  });
+  
   return (
-    <AuthContext.Provider value={{userToken, user}}>
-      <Homepage />
+    <AuthContext.Provider value={{userToken, user, signout}}>
+      <ThemeProvider theme={theme}>
+        <Homepage />
+      </ThemeProvider>
     </AuthContext.Provider>
   )
 }

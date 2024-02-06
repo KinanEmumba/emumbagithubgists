@@ -10,7 +10,6 @@ const UserAvatar = () => {
   const open = Boolean(anchorEl);
   
   const avatarClicked = (e: React.MouseEvent<HTMLInputElement>) => {
-    console.log('avatar clicked', e.target);
     setAnchorEl(e.currentTarget);
   };
 
@@ -26,28 +25,27 @@ const UserAvatar = () => {
     contextValue?.signout();
   }
   
-
   return (
     <>
-    <Avatar className={'circleContainer'} src={user?.avatar_url} onClick={avatarClicked}/>
-    <Menu
-      id="basic-menu"
-      anchorEl={anchorEl}
-      open={open}
-      onClose={(handleClose)}
-      MenuListProps={{
-        'aria-labelledby': 'basic-button',
-      }}
-    >
-      <MenuItem onClick={handleClose}>Signed in as {user?.name || user?.login}</MenuItem>
-      <Divider />
-      <MenuItem onClick={handleClose}>Your gists</MenuItem>
-      <MenuItem onClick={handleClose}>Starred gists</MenuItem>
-      <MenuItem onClick={handleClose}>Help</MenuItem>
-      <Divider />
-      <MenuItem onClick={githubProfile}>Your Githuib profile</MenuItem>
-      <MenuItem onClick={signOut}>Signout</MenuItem>
-    </Menu>
+      <Avatar className={'circleContainer'} src={user?.avatar_url} onClick={avatarClicked}/>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={(handleClose)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem>Signed in as {user?.name || user?.login}</MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>Your gists</MenuItem>
+        <MenuItem onClick={handleClose}>Starred gists</MenuItem>
+        <MenuItem onClick={handleClose}>Help</MenuItem>
+        <Divider />
+        <MenuItem onClick={githubProfile}>Your Githuib profile</MenuItem>
+        <MenuItem onClick={signOut}>Signout</MenuItem>
+      </Menu>
     </>
   )
 }
