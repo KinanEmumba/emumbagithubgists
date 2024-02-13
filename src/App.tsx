@@ -4,6 +4,7 @@ import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
 import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './sharedTypes';
+import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 
 export const AuthContext = createContext<SharedContextType>(null);
@@ -19,6 +20,7 @@ function App() {
   const signout = () => {
     sessionStorage.removeItem('githubTokenObject');
     setUserToken(null);
+    window.location.replace(homePage);
   }
   
   useEffect(() => {
@@ -61,11 +63,13 @@ function App() {
   });
   
   return (
-    <AuthContext.Provider value={{userToken, user, signout}}>
-      <ThemeProvider theme={theme}>
-        <AppRoutes />
-      </ThemeProvider>
-    </AuthContext.Provider>
+    <BrowserRouter>
+      <AuthContext.Provider value={{userToken, user, signout}}>
+        <ThemeProvider theme={theme}>
+          <AppRoutes />
+        </ThemeProvider>
+      </AuthContext.Provider>
+    </BrowserRouter>
   )
 }
 
