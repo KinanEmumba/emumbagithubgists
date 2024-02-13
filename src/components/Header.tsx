@@ -22,7 +22,7 @@ return (
 const Header = ({
   loading
 } : {
-  loading: boolean
+  loading?: boolean
 }) => {
   const contextValue = useContext(AuthContext);
   return (

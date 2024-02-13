@@ -10,15 +10,15 @@ const GistSingleCard = ({
   row: GistDataType,
 }) => {
   const fileArray = row.files && Object.keys(row.files);
-  const firstKey: string = fileArray && fileArray[0] || '';
-  const firstObject = row.files && firstKey && row.files[fileArray[0]];
+  const firstKey = fileArray && fileArray[0] || '';
+  const firstObject = row.files && firstKey && row.files[firstKey];
   const fileURI = firstObject.raw_url || '';
   const {fileData} : {fileData: string} = useFileFetcher({fileURI});
   
   return (
     <Card sx={{ width: 300, margin: 1}}>
       <CardContent sx={{ height: 150 }}>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 14, textWrap: 'wrap' }} color="text.secondary">
           {fileData && fileData.substring(0, 150) + '...'}
         </Typography>
       </CardContent>

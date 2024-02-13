@@ -8,6 +8,8 @@ import { ApiRespType } from '../types';
 import GistTable from '../components/GistTable';
 import GistCards from '../components/GistCards';
 import PaginationHandler from '../components/PaginationHandler';
+import './Homepage.css';
+
 
 const Homepage = () => {
   const [page, setPage] = useState(1);
@@ -20,9 +22,9 @@ const Homepage = () => {
   
   return (
     <>
-      <Header loading={loading}/>
+      <Header/>
       <div className={'innerView'}>
-      <PaginationHandler page={page} onPageChange={() => setPage(page => page + 1)}/>
+        <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
         <div className={'viewSelectionContainer'}>
           <ListIcon
             color={tableView ? 'primary' : 'disabled'}

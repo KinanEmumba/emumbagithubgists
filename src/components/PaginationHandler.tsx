@@ -1,5 +1,7 @@
 import { TablePagination } from '@mui/material'
-import { pageSize } from '../constURLs'
+import { pageSize } from '../constURLs';
+
+export type TablePaginationOnPageCgangeType = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
 
 const PaginationHandler = ({
   onPageChange,
@@ -7,7 +9,7 @@ const PaginationHandler = ({
   rowsPerPage = pageSize,
   rowsPerPageOptions = []
 }: {
-  onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void,
+  onPageChange: TablePaginationOnPageCgangeType,
   page: number
   rowsPerPage?: number,
   rowsPerPageOptions?: []

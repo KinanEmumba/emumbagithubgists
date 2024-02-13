@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import './App.css'
 import Homepage from './pages/Homepage';
 import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
