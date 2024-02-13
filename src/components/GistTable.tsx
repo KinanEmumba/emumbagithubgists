@@ -13,6 +13,15 @@ import { GistDataType } from '../types';
 import './GistTable.css';
 import InContentAvatarSection from './InContentAvatarSection';
 
+const TableCols = [
+  'Name',
+  'Date',
+  'Time',
+  'Owner ID',
+  'First File Name',
+  ''
+];
+
 const GistTable = ({
   data,
 }: {
@@ -25,12 +34,7 @@ const GistTable = ({
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Owner ID</TableCell>
-            <TableCell>First File Name</TableCell>
-            <TableCell />
+            {TableCols.map((col, index) => <TableCell key={index}>{col}</TableCell>)}
           </TableRow>
         </TableHead>
         <TableBody>

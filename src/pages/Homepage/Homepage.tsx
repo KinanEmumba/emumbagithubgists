@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import { CircularProgress } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useGetPublicGists } from '../apis/apis';
-import { ApiRespType } from '../types';
-import GistTable from '../components/GistTable';
-import GistCards from '../components/GistCards';
-import PaginationHandler from '../components/PaginationHandler';
+import { useGetPublicGists } from '../../apis/apis';
+import { ApiRespType } from '../../types';
+import GistTable from '../../components/GistTable';
+import GistCards from '../../components/GistCards';
+import PaginationHandler from '../../components/PaginationHandler';
 import './Homepage.css';
 
 

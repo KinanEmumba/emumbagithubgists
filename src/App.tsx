@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
-import Homepage from './pages/Homepage';
+
+import { ThemeProvider, createTheme } from '@mui/material';
+import Homepage from './pages/Homepage/Homepage';
 import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
 import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
-import { ThemeProvider, createTheme } from '@mui/material';
 
 export const AuthContext = createContext<SharedContextType>(null);
 
@@ -70,3 +71,5 @@ function App() {
 }
 
 export default App
+
+

@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
-import './UserAvatar.css';
 import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
+import './UserAvatar.css';
 import { AuthContext } from '../App';
+import { Link, Navigate } from 'react-router-dom';
 
 const HeaderUserAvatar = () => {
+  console.log('PROPSA', this);
   const contextValue = useContext(AuthContext);
   const user = contextValue?.user;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -15,6 +17,18 @@ const HeaderUserAvatar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const yourGists = () => {
+    Navigate({to:{ pathname: "/usergists" }});
+  };
+  
+  const starredGists = () => {
+
+  };
+  
+  const help = () => {
+
   };
 
   const githubProfile = () => {
@@ -39,9 +53,9 @@ const HeaderUserAvatar = () => {
       >
         <MenuItem>Signed in as {user?.name || user?.login}</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>Your gists</MenuItem>
-        <MenuItem onClick={handleClose}>Starred gists</MenuItem>
-        <MenuItem onClick={handleClose}>Help</MenuItem>
+        <MenuItem><Link to={{ pathname: "/usergists"}}>Your Gists</Link></MenuItem>
+        <MenuItem>Starred gists</MenuItem>
+        <MenuItem onClick={help}>Help</MenuItem>
         <Divider />
         <MenuItem onClick={githubProfile}>Your Githuib profile</MenuItem>
         <MenuItem onClick={signOut}>Signout</MenuItem>
