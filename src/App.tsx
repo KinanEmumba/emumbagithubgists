@@ -6,6 +6,8 @@ import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
 import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Usergists from './pages/Usergists/Usergists';
 
 export const AuthContext = createContext<SharedContextType>(null);
 
@@ -64,12 +66,18 @@ function App() {
   return (
     <AuthContext.Provider value={{userToken, user, signout}}>
       <ThemeProvider theme={theme}>
-        <Homepage />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/usergists" element={<Usergists />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </AuthContext.Provider>
   )
 }
 
 export default App
+
 
 

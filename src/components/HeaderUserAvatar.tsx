@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
 import './UserAvatar.css';
 import { AuthContext } from '../App';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HeaderUserAvatar = () => {
   console.log('PROPSA', this);
@@ -19,13 +19,13 @@ const HeaderUserAvatar = () => {
     setAnchorEl(null);
   };
 
-  const yourGists = () => {
-    Navigate({to:{ pathname: "/usergists" }});
-  };
-  
-  const starredGists = () => {
+  // const yourGists = () => {
 
-  };
+  // };
+  
+  // const starredGists = () => {
+
+  // };
   
   const help = () => {
 
