@@ -16,14 +16,14 @@ const GistSingleCard = ({
   const {fileData} : {fileData: string} = useFileFetcher({fileURI});
   
   return (
-    <Card sx={{ width: 300, margin: 1}}>
-      <CardContent sx={{ height: 150 }}>
+    <Card sx={{ width: 320, margin: 1}}>
+      <CardContent sx={{ height: 200 }}>
         <Typography sx={{ fontSize: 14, textWrap: 'wrap' }} color="text.secondary">
           {fileData && fileData.substring(0, 150) + '...'}
         </Typography>
       </CardContent>
       <Divider />
-      <CardActions sx={{ maxHeight: 100 }}>
+      <CardActions sx={{ minHeight: 100 }}>
         <div className={'flexRow truncatedDiv'}>
           <InContentAvatarSection row={row} hideName/>
           <div style={{flexDirection: 'column'}}>

@@ -15,9 +15,9 @@
 }
 
 .truncatedDiv {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  width: auto;
+  /* text-overflow: ellipsis; */
+  /* white-space: wrap; */
 }
 
 .flexRow {
