@@ -1,8 +1,8 @@
 import { Card, CardActions, CardContent, Divider, Typography } from '@mui/material';
 import { formatRelative } from 'date-fns';
-import useFileFetcher from './FileFetcher';
-import { GistDataType } from '../types';
-import InContentAvatarSection from './InContentAvatarSection';
+import useFileFetcher from '../FileFetcher';
+import { GistDataType } from '../../sharedTypes';
+import InContentAvatarSection from '../InContentAvatarSection';
 
 const GistSingleCard = ({
   row

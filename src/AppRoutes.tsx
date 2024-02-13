@@ -9,12 +9,15 @@ const routes = [
 const AppRoutes = () => {
   return (
     <BrowserRouter>
-      <Routes>{routes.map((route, index) => <Route key={index} path={route.path} element={route.element} />)}
-        {/* <Route path="/" element={<Homepage />} />
-        <Route path="/usergists" element={<Usergists />} /> */}
+      <Routes>
+        {routes.map((route, index) => <Route
+          key={index}
+          path={route.path}
+          element={route.element}
+        />)}
       </Routes>
     </BrowserRouter>
   )
 }
 
-export default AppRoutes
+export default AppRoutes;

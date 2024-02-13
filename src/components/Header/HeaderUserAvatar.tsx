@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
 import './UserAvatar.css';
-import { AuthContext } from '../App';
+import { AuthContext } from '../../App';
 import { Link } from 'react-router-dom';
 
 const HeaderUserAvatar = () => {

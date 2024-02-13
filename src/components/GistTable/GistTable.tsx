@@ -9,9 +9,9 @@ import {
   TableRow
 } from '@mui/material'
 import { format } from 'date-fns';
-import { GistDataType } from '../types';
+import { GistDataType } from '../../sharedTypes';
 import './GistTable.css';
-import InContentAvatarSection from './InContentAvatarSection';
+import InContentAvatarSection from '../InContentAvatarSection';
 
 const TableCols = [
   'Name',
