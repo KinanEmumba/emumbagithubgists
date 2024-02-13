@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { clientID, githubAuthURL } from '../constURLs';
 import './Header.css';
 import SearchBox from './SearchBox';
-import UserAvatar from './UserAvatar';
+import HeaderUserAvatar from './HeaderUserAvatar';
 import { AuthContext } from '../App';
 import { CircularProgress } from '@mui/material';
 
@@ -32,7 +32,7 @@ const Header = ({
         {loading ? <CircularProgress /> : <div className='rightArea'>
           <SearchBox />
           {contextValue?.user ?
-            <UserAvatar /> :
+            <HeaderUserAvatar /> :
             <LoginButton />
           }
         </div>}

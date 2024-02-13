@@ -3,7 +3,7 @@ import './UserAvatar.css';
 import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
 import { AuthContext } from '../App';
 
-const UserAvatar = () => {
+const HeaderUserAvatar = () => {
   const contextValue = useContext(AuthContext);
   const user = contextValue?.user;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -50,4 +50,4 @@ const UserAvatar = () => {
   )
 }
 
-export default UserAvatar
+export default HeaderUserAvatar;

@@ -4,10 +4,22 @@
   display: flex;
   flex-direction: column;
 }
+
 .innerContainer {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+.truncatedDiv {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: 'row';
 }

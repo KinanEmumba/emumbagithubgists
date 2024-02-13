@@ -1,9 +1,10 @@
 import { TablePagination } from '@mui/material'
+import { pageSize } from '../constURLs'
 
 const PaginationHandler = ({
   onPageChange,
   page,
-  rowsPerPage = 10,
+  rowsPerPage = pageSize,
   rowsPerPageOptions = []
 }: {
   onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void,
@@ -15,7 +16,7 @@ const PaginationHandler = ({
     <TablePagination
       count={-1}
       onPageChange={onPageChange}
-      page={page}
+      page={page-1}
       rowsPerPage={rowsPerPage}
       rowsPerPageOptions={rowsPerPageOptions}
     />

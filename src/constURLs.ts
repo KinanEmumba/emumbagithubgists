@@ -12,5 +12,6 @@ export const githubCORSProxy = 'https://corsproxy.io';
 export const githubAPIurl = 'https://api.github.com';
 export const githubGistsBaseURL = `${githubAPIurl}/gists`;
 export const githubPublicGistsBaseURL = `${githubGistsBaseURL}/public`;
-export const githubGistsPageSize = '?per_page=10';
+export const pageSize = 12;
+export const githubGistsPageSize = `?per_page=${pageSize}`;
 export const githubUserURL = `${githubAPIurl}/user`;

@@ -7,6 +7,7 @@ import { useGetPublicGists } from '../apis/apis';
 import { ApiRespType } from '../types';
 import GistTable from '../components/GistTable';
 import GistCards from '../components/GistCards';
+import PaginationHandler from '../components/PaginationHandler';
 
 const Homepage = () => {
   const [page, setPage] = useState(1);
@@ -21,6 +22,7 @@ const Homepage = () => {
     <>
       <Header loading={loading}/>
       <div className={'innerView'}>
+      <PaginationHandler page={page} onPageChange={() => setPage(page => page + 1)}/>
         <div className={'viewSelectionContainer'}>
           <ListIcon
             color={tableView ? 'primary' : 'disabled'}
@@ -36,9 +38,7 @@ const Homepage = () => {
         </div>
         {loading? <CircularProgress /> :
           data ? 
-            tableView ?
-              <GistTable data={data} page={page} setPage={setPage}/> : 
-              <GistCards data={data} page={page} setPage={setPage}/> :
+            tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
           error && error.message
         }
       </div>

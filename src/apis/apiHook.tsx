@@ -13,6 +13,7 @@ export const fetcher = ({url, method, token} : FetchParamsType) => {
 	if (token) {
 		headers['Authorization'] = `Bearer ${token}`;
 	}
+	console.log(`using method ${method}\nand headers ${JSON.stringify(headers)},\ncalling API ${url}`);
 	return fetch(url, {headers, method: method || 'GET'})
 	.then( async (resp) => {
 		if (resp.status === 401) {
