@@ -1,5 +1,5 @@
 import { Paper, TableContainer } from '@mui/material';
-import { GistDataType } from '../../sharedTypes';
+import { GistDataType } from '../../types';
 import './GistCards.css';
 import GistSingleCard from './GistSingleCard';
 

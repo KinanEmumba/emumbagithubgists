@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ApiResponseErrorType, ApiHeadersType, FetchParamsType } from '../sharedTypes';
+import { ApiResponseErrorType, ApiHeadersType, FetchParamsType } from '../types';
 import { getTokenAPI } from './githubOAuth';
 
 const headers: ApiHeadersType = {

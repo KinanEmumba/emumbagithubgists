@@ -9,7 +9,7 @@ import {
   TableRow
 } from '@mui/material'
 import { format } from 'date-fns';
-import { GistDataType } from '../../sharedTypes';
+import { GistDataType } from '../../types';
 import './GistTable.css';
 import InContentAvatarSection from '../InContentAvatarSection';
 

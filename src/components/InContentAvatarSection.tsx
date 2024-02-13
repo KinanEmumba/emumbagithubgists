@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import { GistDataType } from "../sharedTypes";
+import { GistDataType } from "../types";
 
 const InContentAvatarSection = ({
   row,

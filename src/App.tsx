@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { homePage } from './constURLs';
 import { getTokenAPI } from './apis/githubOAuth';
 import { getGithubUser } from './apis/apis';
-import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './sharedTypes';
+import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
 import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 
