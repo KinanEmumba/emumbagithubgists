@@ -23,10 +23,11 @@ const Header = () => {
   const contextValue = useContext(AuthContext);
   const loading = contextValue?.loading;
   const user = contextValue?.user;
+  const gotoHome = contextValue?.gotoHome;
   return (
     <>
       <StyledHeaderView>
-        <StyledLogoText>Emumba</StyledLogoText>
+        <StyledLogoText onClick={()=> gotoHome()}>Emumba Gists</StyledLogoText>
         {loading ? <CircularProgress /> : <RightAreaDiv>
           <SearchBox />
           {user ?

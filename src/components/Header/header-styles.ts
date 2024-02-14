@@ -19,16 +19,24 @@ export const StyledHeaderView = styled('div')({
 });
 
 export const StyledLoginButton = styled('span')(() => `
-  width: 140px;
-  height: 40px;
   margin: 0 10px;
+  padding: 10px 30px;
   background-color: white;
   color: #5acba1;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    opacity: 75%;
+  }
 `
 );
 
 export const StyledLogoText = styled('span')(() => `
-font-size: xx-large;
+  font-size: xx-large;
+  cursor: pointer;
+  &:hover {
+    opacity: 75%;
+  }
 `
 );
 

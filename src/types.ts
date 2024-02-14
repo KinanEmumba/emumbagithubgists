@@ -39,6 +39,7 @@ export type SharedContextType = null | {
   user: UserType,
   userToken: TokenType,
   loading: boolean,
+  gotoHome: () => void,
   signout: () => void,
 };
 

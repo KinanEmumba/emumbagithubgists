@@ -24,7 +24,7 @@ const InContentAvatar = ({
   return (
     <StyledAvatarContainer>
       <StyledAvatar src={row?.owner?.avatar_url} />
-      {/* {hideName? '' : row.owner?.login} */}
+      {hideName? '' : row.owner?.login}
     </StyledAvatarContainer>
   );
 }

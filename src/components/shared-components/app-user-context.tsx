@@ -13,11 +13,16 @@ const useAppUserContext = () => {
   const [user, setUser] = useState<UserType>(null);
   const [loading, setLoading] = useState(!!githubCode);
 
+  const gotoHome = () => {
+    window.location.replace(homePage);
+  };
+
   const signout = () => {
     sessionStorage.removeItem('githubTokenObject');
     setUserToken(null);
-    window.location.replace(homePage);
-  }
+    gotoHome();
+  };
+
   
   useEffect(() => {
     const storedToken = sessionStorage.getItem('githubTokenObject');
@@ -46,12 +51,12 @@ const useAppUserContext = () => {
     const getToken = async () => {
       const token = await getTokenAPI({code});
       console.log('got token', token);
-      window.location.replace(homePage);
+      gotoHome();
     }
     if (code) getToken();
   }, [code]);
 
-  return {userToken, user, loading, signout};
+  return {userToken, user, loading, gotoHome, signout};
 }
 
 export default useAppUserContext
