@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { clientID, githubAuthURL } from '../../constURLs';
-import './Header.css';
-import SearchBox from './SearchBox';
-import HeaderUserAvatar from './HeaderUserAvatar';
+import { clientID, githubAuthURL } from '../../const-urls';
+import './header.css';
+import SearchBox from './search-box';
+import HeaderUserAvatar from './header-user-avatar';
 import { AuthContext } from '../../App';
 import { CircularProgress } from '@mui/material';
 

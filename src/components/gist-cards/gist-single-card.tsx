@@ -1,18 +1,18 @@
 import { Card, CardActions, CardContent, Divider, Typography } from '@mui/material';
 import { formatRelative } from 'date-fns';
-import useFileFetcher from '../FileFetcher';
+import useFileFetcher from '../shared-components/file-fetcher';
 import { GistDataType } from '../../types';
-import InContentAvatarSection from '../InContentAvatarSection';
+import InContentAvatarSection from '../shared-components/in-content-avatar';
 
 const GistSingleCard = ({
   row
 }: {
   row: GistDataType,
 }) => {
-  const fileArray = row.files && Object.keys(row.files);
-  const firstKey = fileArray && fileArray[0] || '';
+  const fileArray = row.files && Object.keys(row.files) ;
+  const firstKey = fileArray && fileArray[0];
   const firstObject = row.files && firstKey && row.files[firstKey];
-  const fileURI = firstObject.raw_url || '';
+  const fileURI = firstObject && firstObject.raw_url;
   const {fileData} : {fileData: string} = useFileFetcher({fileURI});
   
   return (

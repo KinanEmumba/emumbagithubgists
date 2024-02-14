@@ -1,6 +1,6 @@
 import { Search } from '@mui/icons-material'
 import { InputAdornment } from '@mui/material';
-import { TextFieldStyled } from './StyledTextField';
+import { TextFieldStyled } from './styled-text-field';
 
 const SearchBox = () => {
   return (

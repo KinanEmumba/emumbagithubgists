@@ -41,13 +41,13 @@ export type SharedContextType = null | {
   signout: () => void,
 };
 
-export type Filetype = null | {
+export type Filetype = {
   filename: string
   type: string
   language: string | null
   raw_url: string
   size: number
-}[];
+};
 
 export type GistDataType = {
   url?: string
@@ -58,7 +58,7 @@ export type GistDataType = {
   git_pull_url?: string
   git_push_url?: string
   html_url?: string
-  files?: Filetype
+  files: Record<string, Filetype>
   public?: boolean
   created_at?: string
   updated_at?: string

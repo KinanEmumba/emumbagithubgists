@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
-import { homePage } from './constURLs';
-import { getTokenAPI } from './apis/githubOAuth';
+import { homePage } from './const-urls';
+import { getTokenAPI } from './apis/github-oauth';
 import { getGithubUser } from './apis/apis';
 import { ApiResponseErrorType, SharedContextType, TokenType, UserType } from './types';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
+import AppRoutes from './app-routes';
 
 export const AuthContext = createContext<SharedContextType>(null);
 

@@ -1,4 +1,4 @@
-import { githubCORSProxy, githubFullTokenURL } from "../constURLs";
+import { githubCORSProxy, githubFullTokenURL } from "../const-urls";
 
 export const getTokenAPI = async ({
   code,

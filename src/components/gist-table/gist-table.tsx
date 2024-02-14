@@ -10,8 +10,8 @@ import {
 } from '@mui/material'
 import { format } from 'date-fns';
 import { GistDataType } from '../../types';
-import './GistTable.css';
-import InContentAvatarSection from '../InContentAvatarSection';
+import './gist-table.css';
+import InContentAvatarSection from '../shared-components/in-content-avatar';
 
 const TableCols = [
   'Name',

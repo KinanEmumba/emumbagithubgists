@@ -4,12 +4,11 @@ import ListIcon from '@mui/icons-material/List';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useGetPublicGists } from '../../apis/apis';
 import { ApiRespType } from '../../types';
-import GistTable from '../../components/GistTable/GistTable';
-import GistCards from '../../components/GistCards/GistCards';
-import PaginationHandler from '../../components/PaginationHandler';
-import Header from '../../components/Header/Header';
-import './Homepage.css';
-
+import GistTable from '../../components/gist-table/gist-table';
+import GistCards from '../../components/gist-cards/gist-cards';
+import PaginationHandler from '../../components/shared-components/pagination-handler';
+import Header from '../../components/header/header';
+import './homepage.css';
 
 const Homepage = () => {
   const [page, setPage] = useState(1);

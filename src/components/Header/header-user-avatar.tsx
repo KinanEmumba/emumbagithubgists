@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
-import './UserAvatar.css';
+import './user-avatar.css';
 import { AuthContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 

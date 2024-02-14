@@ -1,5 +1,5 @@
-import { githubGistsPageSize, githubPublicGistsBaseURL, githubUserURL } from "../constURLs";
-import useGistAPI, { fetcher } from "./apiHook";
+import { githubGistsPageSize, githubPublicGistsBaseURL, githubUserURL } from "../const-urls";
+import useGistAPI, { fetcher } from "./api-hook";
 
 export const useGetPublicGists = ({page} : {page: number}) => {
   return useGistAPI({

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ApiResponseErrorType, ApiHeadersType, FetchParamsType } from '../types';
-import { getTokenAPI } from './githubOAuth';
+import { getTokenAPI } from './github-oauth';
 
 const headers: ApiHeadersType = {
 	'Accept': 'application/vnd.github+json',

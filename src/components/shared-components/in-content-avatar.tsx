@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material";
-import { GistDataType } from "../types";
+import { GistDataType } from "../../types";
 
-const InContentAvatarSection = ({
+const InContentAvatar = ({
   row,
   hideName
 } : {
@@ -16,4 +16,4 @@ const InContentAvatarSection = ({
   );
 }
 
-export default InContentAvatarSection;
+export default InContentAvatar;

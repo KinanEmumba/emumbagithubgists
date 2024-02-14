@@ -1,7 +1,7 @@
 import { Paper, TableContainer } from '@mui/material';
 import { GistDataType } from '../../types';
-import './GistCards.css';
-import GistSingleCard from './GistSingleCard';
+import './gist-cards.css';
+import GistSingleCard from './gist-single-card';
 
 const GistCards = ({
   data,
