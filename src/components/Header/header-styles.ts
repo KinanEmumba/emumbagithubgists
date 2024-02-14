@@ -6,21 +6,28 @@ export const StyledAvatar = styled(Avatar)({
   height: '50px',
 });
 
-export const StyledHeaderView = styled('div')({
-  margin: 0,
-  padding: '10px',
-  width: '100vw',
-  height: '100px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-  backgroundColor: '#5acba1',
-  position: 'absolute',
-});
+export const StyledHeaderView = styled('div')(() => `
+  margin: 0;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5acba1;
+  position: absolute;
+`);
+
+export const RightAreaDiv = styled('span')(() => `
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 5vw;
+`
+);
 
 export const StyledLoginButton = styled('span')(() => `
   margin: 0 10px;
-  padding: 10px 30px;
+  padding: 10px 40px;
   background-color: white;
   color: #5acba1;
   border-radius: 5px;
@@ -33,17 +40,12 @@ export const StyledLoginButton = styled('span')(() => `
 
 export const StyledLogoText = styled('span')(() => `
   font-size: xx-large;
+  font-weight: bold;
+  padding-left: 5vw;
   cursor: pointer;
   &:hover {
     opacity: 75%;
   }
-`
-);
-
-export const RightAreaDiv = styled('span')(() => `
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 `
 );
 

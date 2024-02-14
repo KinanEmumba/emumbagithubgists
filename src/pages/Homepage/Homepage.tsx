@@ -8,7 +8,7 @@ import GistTable from '../../components/gist-table/gist-table';
 import GistCards from '../../components/gist-cards/gist-cards';
 import PaginationHandler from '../../components/shared-components/pagination-handler';
 import { AuthContext } from '../../App';
-import { StyledViewSelectionContainer, StyledVerticalDivider } from './homepage-styles';
+import { StyledViewSelectionContainer, StyledVerticalDivider, StyledTableContainer } from './homepage-styles';
 
 const Homepage = () => {
   const contextValue = useContext(AuthContext);
@@ -23,7 +23,6 @@ const Homepage = () => {
   
   return (
     <>
-      <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
       <StyledViewSelectionContainer>
         <ListIcon
           color={tableView ? 'primary' : 'disabled'}
@@ -33,15 +32,18 @@ const Homepage = () => {
         <StyledVerticalDivider />
         <DashboardIcon
           color={!tableView ? 'primary' : 'disabled'}
-          fontSize='large'
+          fontSize='medium'
           onClick={() => setTableView(false)}
         />
       </StyledViewSelectionContainer>
-      {apiLoading || loading? <CircularProgress /> :
-        data ? 
+      <StyledTableContainer>
+        {apiLoading || loading? <CircularProgress /> :
+          data ? 
           tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
-        error && error.message
-      }
+          error && error.message
+        }
+      </StyledTableContainer>
+      <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
     </>
   )
 }

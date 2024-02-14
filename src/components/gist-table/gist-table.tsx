@@ -1,9 +1,7 @@
 import {
   CircularProgress,
-  Paper,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow
@@ -11,12 +9,13 @@ import {
 import { format } from 'date-fns';
 import { GistDataType } from '../../types';
 import InContentAvatar from '../shared-components/in-content-avatar';
+import { StyledTableCell } from './gist-table-styles';
+import { themeColorLight } from '../shared-components/app-theme';
 
 const TableCols = [
   'Name',
   'Date',
   'Time',
-  'Owner ID',
   'First File Name',
   ''
 ];
@@ -29,27 +28,23 @@ const GistTable = ({
 
   if (!data || !data.length) return <CircularProgress />;
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+    <TableContainer sx={{ width: '90vw' }}>
+      <Table aria-label="custom pagination table">
         <TableHead>
-          <TableRow>
-            {TableCols.map((col, index) => <TableCell key={index}>{col}</TableCell>)}
+          <TableRow sx={{background: themeColorLight}}>
+            {TableCols.map((col, index) => <StyledTableCell key={index}>{col}</StyledTableCell>)}
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
+            <TableRow key={row.id}>
+              <StyledTableCell component="th" scope="row">
                 <InContentAvatar row={row} />
-              </TableCell>
-              <TableCell>{row.created_at && format(new Date(row.created_at), 'd MMM, yyyy')}</TableCell>
-              <TableCell>{row.created_at && format(new Date(row.created_at), 'HH:mm a')}</TableCell>
-              <TableCell>{row.owner?.id}</TableCell>
-              <TableCell>{row.files && Object.keys(row.files)[0]}</TableCell>
-              <TableCell>{row.owner?.id}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell>{row.created_at && format(new Date(row.created_at), 'd MMM, yyyy')}</StyledTableCell>
+              <StyledTableCell>{row.created_at && format(new Date(row.created_at), 'HH:mm a')}</StyledTableCell>
+              <StyledTableCell>{row.files && Object.keys(row.files)[0]}</StyledTableCell>
+              <StyledTableCell>{' '}</StyledTableCell>
             </TableRow>
           ))}
         </TableBody>

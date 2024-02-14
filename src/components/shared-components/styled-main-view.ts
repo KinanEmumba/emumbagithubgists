@@ -1,7 +1,7 @@
 import {styled } from '@mui/material';
 
 export const MainDiv = styled('div')({
-  marginTop: '120px',
+  marginTop: '80px',
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',

@@ -8,16 +8,25 @@ export const StyledInnerView = styled('div')(() => `
 `
 );
 export const StyledViewSelectionContainer = styled('div')(() => `
-  width: 100vw;
+  width: 80vw;
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  justify-content: flex-end;
+  margin: 20px;
+  align-items: center;
 `
 );
 export const StyledVerticalDivider = styled('div')(() => `
   width: 2px;
-  height: 35px;
-  background: whitesmoke;
-  margin-top: 0px;
+  height: 30px;
+  background: lightgrey;
+  margin: 0px 10px;
+`
+);
+
+export const StyledTableContainer = styled('div')(() => `
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
 `
 );

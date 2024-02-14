@@ -8,8 +8,7 @@ const StyledAvatarContainer = styled('div')({
 });
 
 const StyledAvatar = styled(Avatar)({
-  margin: '20px',
-  marginLeft: '0px',
+  marginRight: '20px',
   width: '50px',
   height: '50px',
 });
