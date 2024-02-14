@@ -1,21 +1,21 @@
 import { useContext } from 'react';
 import { clientID, githubAuthURL } from '../../const-urls';
-import './header.css';
 import SearchBox from './search-box';
 import HeaderUserAvatar from './header-user-avatar';
 import { AuthContext } from '../../App';
 import { CircularProgress } from '@mui/material';
+import { RightAreaDiv, StyledHeaderView, StyledLoginButton, StyledLogoText } from './header-styles';
+
 
 const LoginButton = () => {
 return (
-  <button
-    className={'loginButton'}
+  <StyledLoginButton
     onClick={() => {
       window.location.replace(`${githubAuthURL}?client_id=${clientID}`)
     }}
   >
     Login
-  </button>
+  </StyledLoginButton>
 );
 }
 
@@ -25,16 +25,16 @@ const Header = () => {
   const user = contextValue?.user;
   return (
     <>
-      <div className={'main'}>
-        <span className={'logoText'}>Emumba</span>
-        {loading ? <CircularProgress /> : <div className='rightArea'>
+      <StyledHeaderView>
+        <StyledLogoText>Emumba</StyledLogoText>
+        {loading ? <CircularProgress /> : <RightAreaDiv>
           <SearchBox />
           {user ?
             <HeaderUserAvatar /> :
             <LoginButton />
           }
-        </div>}
-      </div>
+        </RightAreaDiv>}
+      </StyledHeaderView>
     </>
   )
 }

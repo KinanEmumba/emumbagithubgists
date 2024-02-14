@@ -10,8 +10,7 @@ import {
 } from '@mui/material'
 import { format } from 'date-fns';
 import { GistDataType } from '../../types';
-import './gist-table.css';
-import InContentAvatarSection from '../shared-components/in-content-avatar';
+import InContentAvatar from '../shared-components/in-content-avatar';
 
 const TableCols = [
   'Name',
@@ -44,7 +43,7 @@ const GistTable = ({
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <InContentAvatarSection row={row} />
+                <InContentAvatar row={row} />
               </TableCell>
               <TableCell>{row.created_at && format(new Date(row.created_at), 'd MMM, yyyy')}</TableCell>
               <TableCell>{row.created_at && format(new Date(row.created_at), 'HH:mm a')}</TableCell>

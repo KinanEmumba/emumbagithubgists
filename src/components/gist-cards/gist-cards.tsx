@@ -1,7 +1,7 @@
 import { Paper, TableContainer } from '@mui/material';
 import { GistDataType } from '../../types';
-import './gist-cards.css';
 import GistSingleCard from './gist-single-card';
+import { InnerContainer } from './gist-cards-styles';
 
 const GistCards = ({
   data,
@@ -15,9 +15,9 @@ const GistCards = ({
         flexDirection: 'row',
         justifyContent: 'center',
     }}>
-      <div className={'innerContainer'}>
+      <InnerContainer>
         {data?.map(row => <GistSingleCard key={row.id} row={row} />)}
-      </div>
+      </InnerContainer>
     </TableContainer>
   );
 }

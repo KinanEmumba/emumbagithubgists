@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { Avatar, Divider, Menu, MenuItem } from '@mui/material';
-import './user-avatar.css';
+import { Divider, Menu, MenuItem } from '@mui/material';
 import { AuthContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import { StyledAvatar } from './header-styles';
 
 const HeaderUserAvatar = () => {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const HeaderUserAvatar = () => {
   
   return (
     <>
-      <Avatar className={'circleContainer'} src={user?.avatar_url} onClick={avatarClicked}/>
+      <StyledAvatar src={user?.avatar_url} onClick={avatarClicked}/>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

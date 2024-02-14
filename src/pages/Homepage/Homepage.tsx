@@ -7,9 +7,8 @@ import { ApiRespType } from '../../types';
 import GistTable from '../../components/gist-table/gist-table';
 import GistCards from '../../components/gist-cards/gist-cards';
 import PaginationHandler from '../../components/shared-components/pagination-handler';
-import Header from '../../components/header/header';
-import './homepage.css';
 import { AuthContext } from '../../App';
+import { StyledViewSelectionContainer, StyledVerticalDivider } from './homepage-styles';
 
 const Homepage = () => {
   const contextValue = useContext(AuthContext);
@@ -24,28 +23,25 @@ const Homepage = () => {
   
   return (
     <>
-      <Header/>
-      <div className={'innerView'}>
-        <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
-        <div className={'viewSelectionContainer'}>
-          <ListIcon
-            color={tableView ? 'primary' : 'disabled'}
-            fontSize='large'
-            onClick={() => setTableView(true)}
-          />
-          <div className={'verticalDivider'} />
-          <DashboardIcon
-            color={!tableView ? 'primary' : 'disabled'}
-            fontSize='large'
-            onClick={() => setTableView(false)}
-          />
-        </div>
-        {apiLoading || loading? <CircularProgress /> :
-          data ? 
-            tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
-          error && error.message
-        }
-      </div>
+      <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
+      <StyledViewSelectionContainer>
+        <ListIcon
+          color={tableView ? 'primary' : 'disabled'}
+          fontSize='large'
+          onClick={() => setTableView(true)}
+        />
+        <StyledVerticalDivider />
+        <DashboardIcon
+          color={!tableView ? 'primary' : 'disabled'}
+          fontSize='large'
+          onClick={() => setTableView(false)}
+        />
+      </StyledViewSelectionContainer>
+      {apiLoading || loading? <CircularProgress /> :
+        data ? 
+          tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
+        error && error.message
+      }
     </>
   )
 }

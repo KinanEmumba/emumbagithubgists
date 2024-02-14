@@ -2,7 +2,8 @@ import { Card, CardActions, CardContent, Divider, Typography } from '@mui/materi
 import { formatRelative } from 'date-fns';
 import useFileFetcher from '../shared-components/file-fetcher';
 import { GistDataType } from '../../types';
-import InContentAvatarSection from '../shared-components/in-content-avatar';
+import InContentAvatar from '../shared-components/in-content-avatar';
+import { FlexRow } from './gist-cards-styles';
 
 const GistSingleCard = ({
   row
@@ -24,8 +25,8 @@ const GistSingleCard = ({
       </CardContent>
       <Divider />
       <CardActions sx={{ minHeight: 100 }}>
-        <div className={'flexRow truncatedDiv'}>
-          <InContentAvatarSection row={row} hideName/>
+        <FlexRow>
+          <InContentAvatar row={row} hideName/>
           <div style={{flexDirection: 'column'}}>
             <div>
               {`${row.owner?.login} / ${row.description}`}
@@ -34,7 +35,7 @@ const GistSingleCard = ({
               {`Created ${row.created_at && formatRelative(new Date(), new Date(row.created_at))}`}
             </div>
           </div>
-        </div>
+        </FlexRow>
       </CardActions>
     </Card>
   )

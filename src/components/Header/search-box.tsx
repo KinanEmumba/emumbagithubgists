@@ -1,10 +1,10 @@
 import { Search } from '@mui/icons-material'
 import { InputAdornment } from '@mui/material';
-import { TextFieldStyled } from './styled-text-field';
+import { StyledTextfieldContainer, TextFieldStyled } from './header-styles';
 
 const SearchBox = () => {
   return (
-    <div style={{width: '400px'}}>
+    <StyledTextfieldContainer>
       <TextFieldStyled
         fullWidth
         label={'Search'}
@@ -16,7 +16,7 @@ const SearchBox = () => {
           ),
         }}
       />
-    </div>
+    </StyledTextfieldContainer>
   )
 }
 
