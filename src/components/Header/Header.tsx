@@ -19,19 +19,17 @@ return (
 );
 }
 
-const Header = ({
-  loading
-} : {
-  loading?: boolean
-}) => {
+const Header = () => {
   const contextValue = useContext(AuthContext);
+  const loading = contextValue?.loading;
+  const user = contextValue?.user;
   return (
     <>
       <div className={'main'}>
         <span className={'logoText'}>Emumba</span>
         {loading ? <CircularProgress /> : <div className='rightArea'>
           <SearchBox />
-          {contextValue?.user ?
+          {user ?
             <HeaderUserAvatar /> :
             <LoginButton />
           }

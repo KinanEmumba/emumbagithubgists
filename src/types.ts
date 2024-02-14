@@ -36,8 +36,9 @@ export type UserType = null | {
 };
 
 export type SharedContextType = null | {
-  user?: UserType,
-  userToken?: TokenType,
+  user: UserType,
+  userToken: TokenType,
+  loading: boolean,
   signout: () => void,
 };
 

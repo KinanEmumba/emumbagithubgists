@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -9,13 +9,16 @@ import GistCards from '../../components/gist-cards/gist-cards';
 import PaginationHandler from '../../components/shared-components/pagination-handler';
 import Header from '../../components/header/header';
 import './homepage.css';
+import { AuthContext } from '../../App';
 
 const Homepage = () => {
+  const contextValue = useContext(AuthContext);
+  const loading = contextValue?.loading;
   const [page, setPage] = useState(1);
   const [tableView, setTableView] = useState(true);
   const {
     data,
-    loading,
+    loading: apiLoading,
     error
   } : ApiRespType = useGetPublicGists({page});
   
@@ -37,7 +40,7 @@ const Homepage = () => {
             onClick={() => setTableView(false)}
           />
         </div>
-        {loading? <CircularProgress /> :
+        {apiLoading || loading? <CircularProgress /> :
           data ? 
             tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
           error && error.message
