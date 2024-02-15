@@ -25,19 +25,6 @@ export const RightAreaDiv = styled('span')(() => `
 `
 );
 
-export const StyledLoginButton = styled('span')(() => `
-  margin: 0 10px;
-  padding: 10px 40px;
-  background-color: white;
-  color: #5acba1;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    opacity: 75%;
-  }
-`
-);
-
 export const StyledLogoText = styled('span')(() => `
   font-size: xx-large;
   font-weight: bold;

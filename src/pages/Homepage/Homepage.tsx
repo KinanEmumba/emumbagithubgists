@@ -20,7 +20,6 @@ const Homepage = () => {
     loading: apiLoading,
     error
   } : ApiRespType = useGetPublicGists({page});
-  
   return (
     <>
       <StyledViewSelectionContainer>
@@ -43,7 +42,7 @@ const Homepage = () => {
           error && error.message
         }
       </StyledTableContainer>
-      <PaginationHandler page={page} onPageChange={(_event, newPage) => setPage(newPage + 1)}/>
+      <PaginationHandler page={page} onPageChange={(newPage) => setPage(newPage)}/>
     </>
   )
 }

@@ -4,20 +4,8 @@ import SearchBox from './search-box';
 import HeaderUserAvatar from './header-user-avatar';
 import { AuthContext } from '../../App';
 import { CircularProgress } from '@mui/material';
-import { RightAreaDiv, StyledHeaderView, StyledLoginButton, StyledLogoText } from './header-styles';
-
-
-const LoginButton = () => {
-return (
-  <StyledLoginButton
-    onClick={() => {
-      window.location.replace(`${githubAuthURL}?client_id=${clientID}`)
-    }}
-  >
-    Login
-  </StyledLoginButton>
-);
-}
+import { RightAreaDiv, StyledHeaderView, StyledLogoText } from './header-styles';
+import AppButton from '../shared-components/app-button';
 
 const Header = () => {
   const contextValue = useContext(AuthContext);
@@ -31,7 +19,10 @@ const Header = () => {
           <SearchBox />
           {user ?
             <HeaderUserAvatar /> :
-            <LoginButton />
+            <AppButton
+              buttonText={'Login'}
+              onClick={() => window.location.replace(`${githubAuthURL}?client_id=${clientID}`)}
+            />
           }
         </RightAreaDiv>}
       </StyledHeaderView>
