@@ -57,10 +57,10 @@ const PageInput = ({
     }
   },[page])
 
-  const handleChange = (e: { target: { value: string } }) => {
-    if (e.target.value === '') return;
-    const inputVal = e.target.value;
-    const inputInt = parseInt(inputVal);
+  const handleChange = () => {
+    const val = inputRef.current?.value || '';
+    if (val === '') return;
+    const inputInt = parseInt(val);
     if (inputRef?.current) {
       if (typeof inputInt === 'number') {
         onPageChange(inputInt || 1)
@@ -85,7 +85,8 @@ const PageInput = ({
       <StyledPageInput
         ref={inputRef}
         defaultValue={page}
-        onChange={handleChange}
+        onBlur={handleChange}
+        onKeyUp={(e) => e.key === 'Enter' && handleChange()}
       />
       {`gists ${startingGistNumber(page)} to ${endingGistNumberPage(page)}`}
     </StyledPageInputContainer>
