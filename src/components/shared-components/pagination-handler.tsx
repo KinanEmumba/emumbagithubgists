@@ -4,7 +4,7 @@ import EastIcon from '@mui/icons-material/East';
 import WestIcon from '@mui/icons-material/West';
 import { pageSize } from '../../const-urls';
 import { themeColor } from './app-theme';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const StyledPaginationContainer = styled('div')(() => `
   width: 90vw;
@@ -48,6 +48,11 @@ const PageInput = ({
   onPageChange: (newPage: number) => void,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (inputRef?.current) {
+      inputRef.current.value = '' + page;
+    }
+  },[page])
 
   const handleChange = (e: { target: { value: string } }) => {
     if (e.target.value === '') return;
