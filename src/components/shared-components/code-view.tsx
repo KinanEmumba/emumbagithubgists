@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useFileFetcher from "./file-fetcher";
+import { useCallback } from "react";
 
 export const StyledIndex = styled.span`
   color: grey;
@@ -37,19 +38,23 @@ const CodeView = ({
   fileURI: string,
 }) => {
   const {fileData} : {fileData: string} = useFileFetcher({fileURI});
-  const textArray = fileData.split('\n');
-  const cleanedTextArray = textArray.filter(line => line !== '');
+
+  const fileDataMaker = useCallback(() => {
+    const textArray = fileData.split('\n');
+    const cleanedTextArray = textArray.filter(line => line !== '');
+    return cleanedTextArray.map((line, index) => {
+      return (
+        <CodeContainer>
+          <StyledIndex>{index}</StyledIndex>
+          <StyledCodeLine>{line}</StyledCodeLine>
+        </CodeContainer>
+      );
+    });
+  }, [fileData])
 
   return (
     <FlexColumn>
-      {cleanedTextArray.map((line, index) => {
-        return (
-          <CodeContainer>
-            <StyledIndex>{index}</StyledIndex>
-            <StyledCodeLine>{line}</StyledCodeLine>
-          </CodeContainer>
-        );
-      })}
+      {fileDataMaker()}
     </FlexColumn>
   )
 }
