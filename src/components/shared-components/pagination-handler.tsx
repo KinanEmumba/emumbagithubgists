@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import styled from 'styled-components';
 import AppButton from './app-button';
 import EastIcon from '@mui/icons-material/East';
 import WestIcon from '@mui/icons-material/West';
@@ -16,11 +16,14 @@ export const StyledPaginationContainer = styled('div')(() => `
 `
 );
 
-export const FlexOneDiv = styled('div')(() => `
+export type FlexOneDivProps = {align?: string};
+
+export const FlexOneDiv = styled.div<FlexOneDivProps> `
   display: flex;
   flex-direction: row;
-`
-);
+  flex: 1;
+  justifyContent: ${(props => props.align || 'flex-start')}
+`;
 
 export const StyledPageInputContainer = styled('div')(() => `
   display: flex;
@@ -91,7 +94,7 @@ const PaginationHandler = ({
   return (
     <StyledPaginationContainer>
       <FlexOneDiv />
-      <FlexOneDiv>
+      <FlexOneDiv align={'center'}>
         {page > 1 && <AppButton
           onClick={() => onPageChange(page - 1)}
           colored={true}
@@ -109,7 +112,7 @@ const PaginationHandler = ({
           </>}
         />
       </FlexOneDiv>
-      <FlexOneDiv>
+      <FlexOneDiv align={'flex-end'}>
         <PageInput page={page} onPageChange={onPageChange}/>
       </FlexOneDiv>
     </StyledPaginationContainer>
