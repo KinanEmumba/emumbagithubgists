@@ -1,27 +1,25 @@
-import { Card, CardActions, CardContent, Divider, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, Divider } from '@mui/material';
 import { formatRelative } from 'date-fns';
-import useFileFetcher from '../shared-components/file-fetcher';
 import { GistDataType } from '../../types';
 import InContentAvatar from '../shared-components/in-content-avatar';
 import { FlexRow, StyledDate, StyledFilename, StyledUsername } from './gist-cards-styles';
+import CodeView from '../shared-components/code-view';
 
 const GistSingleCard = ({
   row
 }: {
   row: GistDataType,
 }) => {
-  const fileArray = row.files && Object.keys(row.files) ;
-  const firstKey = fileArray && fileArray[0];
-  const firstObject = row.files && firstKey && row.files[firstKey];
-  const fileURI = firstObject && firstObject.raw_url;
-  const {fileData} : {fileData: string} = useFileFetcher({fileURI});
+  const filesObject = row.files;
+  const fileArray = Object.keys(filesObject);
+  const firstKey = fileArray[0];
+  const firstObject = filesObject[firstKey];
+  const fileURI = firstObject.raw_url;
   
   return (
     <Card sx={{ width: 320, margin: 1}}>
       <CardContent sx={{ height: 200 }}>
-        <Typography sx={{ fontSize: 14, textWrap: 'wrap' }} color="text.secondary">
-          {fileData && fileData.substring(0, 150) + '...'}
-        </Typography>
+        <CodeView fileURI={fileURI} />
       </CardContent>
       <Divider />
       <CardActions sx={{ minHeight: 100, maxHeight: 100 }}>
