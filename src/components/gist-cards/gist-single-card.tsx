@@ -3,7 +3,7 @@ import { formatRelative } from 'date-fns';
 import useFileFetcher from '../shared-components/file-fetcher';
 import { GistDataType } from '../../types';
 import InContentAvatar from '../shared-components/in-content-avatar';
-import { FlexRow } from './gist-cards-styles';
+import { FlexRow, StyledDate, StyledFilename, StyledUsername } from './gist-cards-styles';
 
 const GistSingleCard = ({
   row
@@ -24,16 +24,17 @@ const GistSingleCard = ({
         </Typography>
       </CardContent>
       <Divider />
-      <CardActions sx={{ minHeight: 100 }}>
+      <CardActions sx={{ minHeight: 100, maxHeight: 100 }}>
         <FlexRow>
           <InContentAvatar row={row} hideName/>
           <div style={{flexDirection: 'column'}}>
-            <div>
-              {`${row.owner?.login} / ${row.description}`}
-            </div>
-            <div>
+            <StyledUsername>
+              {`${row.owner?.login}`}
+            </StyledUsername>
+            <StyledFilename> {`${row.description}`.substring(0, 27)+ '...'} </StyledFilename>
+            <StyledDate>
               {`Created ${row.created_at && formatRelative(new Date(), new Date(row.created_at))}`}
-            </div>
+            </StyledDate>
           </div>
         </FlexRow>
       </CardActions>

@@ -1,7 +1,9 @@
 import { createTheme } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 export const themeColor = '#5acba1';
 export const themeColorLight = '#5acba150';
+export const iceBlue = blue[700];
 
 export const theme = createTheme({
   palette: {
