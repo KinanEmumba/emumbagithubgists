@@ -71,6 +71,14 @@ const PageInput = ({
     }
   };
 
+  const startingGistNumber = (page: number) => {
+    return ((page-1) * pageSize) !== 1 && ((page-1) * pageSize)+1 || 1;
+  }
+  
+  const endingGistNumberPage = (page: number) => {
+    return ((page-1) * pageSize) + pageSize;
+  }
+
   return(
     <StyledPageInputContainer>
       {`Page`}
@@ -79,7 +87,7 @@ const PageInput = ({
         defaultValue={page}
         onChange={handleChange}
       />
-      {`gists ${page * pageSize} to ${(page * pageSize) + pageSize}`}
+      {`gists ${startingGistNumber(page)} to ${endingGistNumberPage(page)}`}
     </StyledPageInputContainer>
   );
 }

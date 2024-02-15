@@ -12,20 +12,22 @@ export const StyledCodeLine = styled.span`
   font-size: 12px;
   font-weight: 600;
   color: black;
-  width: 250px;
   word-wrap: break-word;
+  width: 250px;
 `;
 
 export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  height: 100%;
 `;
 
 export const CodeContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 `;
 
 
@@ -37,11 +39,10 @@ const CodeView = ({
   const {fileData} : {fileData: string} = useFileFetcher({fileURI});
   const textArray = fileData.split('\n');
   const cleanedTextArray = textArray.filter(line => line !== '');
-  const slicedTextArray = cleanedTextArray.splice(0,3);
 
   return (
     <FlexColumn>
-      {slicedTextArray.map((line, index) => {
+      {cleanedTextArray.map((line, index) => {
         return (
           <CodeContainer>
             <StyledIndex>{index}</StyledIndex>
