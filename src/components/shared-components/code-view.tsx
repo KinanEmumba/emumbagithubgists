@@ -12,9 +12,8 @@ export const StyledCodeLine = styled.span`
   font-size: 12px;
   font-weight: 600;
   color: black;
-  min-width: 40px;
-  max-width: 100%;
-  word-wrap: wrap;
+  width: 250px;
+  word-wrap: break-word;
 `;
 
 export const FlexColumn = styled.div`
