@@ -22,7 +22,7 @@ export const FlexOneDiv = styled.div<FlexOneDivProps> `
   display: flex;
   flex-direction: row;
   flex: 1;
-  justifyContent: ${(props => props.align || 'flex-start')}
+  justify-content: ${(props => props.align || 'flex-start')};
 `;
 
 export const StyledPageInputContainer = styled('div')(() => `

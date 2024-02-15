@@ -11,6 +11,7 @@ import { GistDataType } from '../../types';
 import InContentAvatar from '../shared-components/in-content-avatar';
 import { StyledTableCell } from './gist-table-styles';
 import { themeColorLight } from '../shared-components/app-theme';
+import { LoaderArea } from '../shared-components/styled-main-view';
 
 const TableCols = [
   'Name',
@@ -22,11 +23,17 @@ const TableCols = [
 
 const GistTable = ({
   data,
+  loading,
 }: {
   data: null | GistDataType[],
+  loading?: boolean,
 }) => {
 
-  if (!data || !data.length) return <CircularProgress />;
+  if (loading || !data || !data.length) return (
+    <LoaderArea>
+      <CircularProgress />
+    </LoaderArea>
+  );
   return (
     <TableContainer sx={{ width: '90vw' }}>
       <Table aria-label="custom pagination table">

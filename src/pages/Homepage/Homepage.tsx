@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { CircularProgress } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useGetPublicGists } from '../../apis/apis';
@@ -36,9 +35,9 @@ const Homepage = () => {
         />
       </StyledViewSelectionContainer>
       <StyledTableContainer>
-        {apiLoading || loading? <CircularProgress /> :
-          data ? 
-          tableView ? <GistTable data={data} /> : <GistCards data={data} /> :
+        {data ? 
+          tableView ? <GistTable data={data} loading={apiLoading || loading} /> :
+          <GistCards data={data} loading={apiLoading || loading}/> :
           error && error.message
         }
       </StyledTableContainer>
