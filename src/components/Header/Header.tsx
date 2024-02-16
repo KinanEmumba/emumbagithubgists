@@ -6,17 +6,30 @@ import { AuthContext } from '../../App';
 import { CircularProgress } from '@mui/material';
 import { RightAreaDiv, StyledHeaderView, StyledLogoText } from './header-styles';
 import AppButton from '../shared-components/app-button';
+import { GistDataType } from '../../types';
 
 const Header = () => {
   const contextValue = useContext(AuthContext);
   const loading = contextValue?.loading;
   const user = contextValue?.user;
+
+  const searchResult = ({
+    data,
+    error
+  }: {
+    data?: GistDataType
+    error?: string
+  }) => {
+    console.log('searchedGist data:', data);
+    console.log('searchedGist error:', error);
+  };
+
   return (
     <>
       <StyledHeaderView>
         <StyledLogoText onClick={()=> contextValue?.gotoHome()}>Emumba Gists</StyledLogoText>
         {loading ? <CircularProgress /> : <RightAreaDiv>
-          <SearchBox />
+          <SearchBox searchResult={searchResult}/>
           {user ?
             <HeaderUserAvatar /> :
             <AppButton
