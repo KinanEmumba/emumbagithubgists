@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { githubCORSProxy, githubFullTokenURL } from "../const-urls";
+const githubTokenInstance = axios.create();
 
 export const getTokenAPI = async ({
   code,
@@ -13,12 +14,16 @@ export const getTokenAPI = async ({
   const apiURL = encodeURIComponent(code ? codeURL : refreshURL);
   const url = `${githubCORSProxy}/?${apiURL}`;
 
+  githubTokenInstance.interceptors.request.use(
+    (config) => {
+      config.headers.Accept = 'application/json';
+      console.log(`using method ${config.method}\nand headers ${JSON.stringify(config.headers)}\ncalling API ${url}`);
+      return config;
+    }
+  );
+
   try {
-    const response = await axios.post(url, null, {
-      headers: {
-        Accept: 'application/json',
-      },
-    });
+    const response = await githubTokenInstance.post(url);
     const jsonResp = response.data;
     console.log('GitHub token JSON response:', jsonResp);
     sessionStorage.setItem('githubTokenObject', JSON.stringify(jsonResp));

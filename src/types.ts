@@ -1,24 +1,6 @@
-
-export type ApiHeadersType = {
-  'Accept': string,
-	'X-GitHub-Api-Version': string,
-	'Authorization'?: string
-};
-
-export type ApiResponseErrorType = null | {
-  message?: string
-};
-
 export type FetchParamsType = {
   url: string
 	method?: string
-	token?: string | null
-};
-
-export type ApiRespType = {
-  data: null | object,
-	loading: boolean,
-	error: ApiResponseErrorType
 };
 
 export type TokenType = null | {
@@ -52,6 +34,7 @@ export type Filetype = {
 };
 
 export type GistDataType = {
+  truncated?: boolean
   url?: string
   forks_url?: string
   commits_url?: string
@@ -88,5 +71,4 @@ export type GistDataType = {
     type?: string
     site_admin?: boolean
   }
-  truncated?: boolean
 };

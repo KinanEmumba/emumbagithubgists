@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getGithubUser } from '../../apis/apis';
 import { getTokenAPI } from '../../apis/github-oauth';
 import { homePage } from '../../const-urls';
-import { TokenType, UserType, ApiResponseErrorType } from '../../types';
+import { TokenType, UserType } from '../../types';
 
 const useAppUserContext = () => {
   const search = window.location.search;
@@ -32,16 +32,15 @@ const useAppUserContext = () => {
   
   useEffect(() => {
     const getUser = async () => {
-      setLoading(true);
-      getGithubUser({token: userToken?.access_token})
-      .then((user: UserType) => {
+      try {
+        setLoading(true);
+        const user = await getGithubUser({token: userToken?.access_token})
         setLoading(false);
         setUser(user);
-      })
-      .catch((err: ApiResponseErrorType) => {
+      } catch (err) {
         setLoading(false);
-        console.log('user err is', err)
-      })
+        console.log('user err is', err);
+      }
     }
     if (userToken) getUser();
   }, [userToken]);
