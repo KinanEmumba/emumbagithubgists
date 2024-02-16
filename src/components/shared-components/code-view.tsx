@@ -40,7 +40,7 @@ const CodeView = ({
 }) => {
   const {fileData} : {fileData: string| undefined} = useFileFetcher({fileURI});
 
-  const fileDataMaker = useCallback(() => {
+  const textFileMaker = useCallback((fileData: string) => {
     const textArray = fileData?.split('\n');
     const cleanedTextArray = textArray?.filter(line => line !== '');
     return cleanedTextArray?.map((line, index) => {
@@ -51,11 +51,19 @@ const CodeView = ({
         </CodeContainer>
       );
     });
-  }, [fileData, fileURI])
+  }, [fileURI])
+
+  const fileDataMaker = () => {
+    return textFileMaker(
+      typeof fileData === 'string' ?
+        fileData :
+        JSON.stringify(fileData)
+      );
+  };
 
   return (
     <FlexColumn>
-      {!fileData ? <CircularProgress /> : fileDataMaker()}
+      {fileData ? fileDataMaker() : <CircularProgress /> }
     </FlexColumn>
   )
 }
