@@ -2,14 +2,13 @@ import {styled} from 'styled-components';
 import { iceBlue } from '../shared-components/app-theme';
 
 export const FullContainer = styled('div')(() => `
-  width: 100%;
   height: 600px;
   display: flex;
   flex-direction: column;
 `);
 
 export const InnerContainer = styled('div')(() => `
-  width: 60vw;
+  width: 90vw;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

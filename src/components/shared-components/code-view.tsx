@@ -15,7 +15,7 @@ export const StyledCodeLine = styled.span`
   font-weight: 600;
   color: black;
   word-wrap: break-word;
-  width: 250px;
+  width: auto;
 `;
 
 export const FlexColumn = styled.div`

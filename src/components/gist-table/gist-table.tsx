@@ -12,6 +12,7 @@ import InContentAvatar from '../shared-components/in-content-avatar';
 import { StyledTableCell } from './gist-table-styles';
 import { themeColorLight } from '../shared-components/app-theme';
 import { LoaderArea } from '../shared-components/styled-main-view';
+import { useNavigate } from 'react-router-dom';
 
 const TableCols = [
   'Name',
@@ -28,6 +29,11 @@ const GistTable = ({
   data: undefined | GistDataType[],
   loading?: boolean,
 }) => {
+  const navigate = useNavigate();
+
+  const openGist = (gist: GistDataType) => {
+    navigate('/gist', {state: {gist}});
+  };
 
   if (loading || !data) return (
     <LoaderArea>
@@ -35,7 +41,7 @@ const GistTable = ({
     </LoaderArea>
   );
   return (
-    <TableContainer sx={{ width: '90vw',minHeight: '720px' }}>
+    <TableContainer sx={{ width: '90vw', minHeight: '720px' }}>
       <Table aria-label="custom pagination table">
         <TableHead>
           <TableRow sx={{background: themeColorLight}}>
@@ -44,7 +50,7 @@ const GistTable = ({
         </TableHead>
         <TableBody sx={{ height: '720px'}}>
           {data.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} onClick={()=> openGist(row)}>
               <StyledTableCell component="th" scope="row">
                 <InContentAvatar row={row} />
               </StyledTableCell>
