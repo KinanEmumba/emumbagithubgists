@@ -44,7 +44,7 @@ const CodeView = ({
     const cleanedTextArray = textArray.filter(line => line !== '');
     return cleanedTextArray.map((line, index) => {
       return (
-        <CodeContainer>
+        <CodeContainer key={index}>
           <StyledIndex>{index}</StyledIndex>
           <StyledCodeLine>{line}</StyledCodeLine>
         </CodeContainer>

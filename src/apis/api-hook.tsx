@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios, { AxiosRequestConfig } from 'axios';
 import { ApiResponseErrorType, ApiHeadersType, FetchParamsType } from '../types';
 import { getTokenAPI } from './github-oauth';
 
@@ -7,36 +8,38 @@ const headers: ApiHeadersType = {
 	'X-GitHub-Api-Version': '2022-11-28'
 };
 
-let refeshAttempts = 0;
+let refreshAttempts = 0;
 
-export const fetcher = ({url, method, token} : FetchParamsType) => {
+export const fetcher = async ({url, method, token} : FetchParamsType) => {
 	if (token) {
 		headers['Authorization'] = `Bearer ${token}`;
 	}
 	console.log(`using method ${method}\nand headers ${JSON.stringify(headers)},\ncalling API ${url}`);
-	return fetch(url, {headers, method: method || 'GET'})
-	.then( async (resp) => {
-		if (resp.status === 401) {
-			return {status: 401, message: 'expired token'}
-		}
-		return resp.json()
-	})
-	.then(jsonResp => {
-		console.log('API resp', jsonResp);
-		if (jsonResp.status === 401) {
-			refeshAttempts += 1;
-			if (refeshAttempts === 2) {
-				refeshAttempts = 0;
-				return Promise.resolve(jsonResp);
-			}
-			return refreshTokenAndRecallAPI({url, method})
-		}
-		return Promise.resolve(jsonResp);
-	})
-	.catch(err => {
-		console.log('API err', err)
-		return Promise.reject(err);
-	})
+	try {
+    const config: AxiosRequestConfig = {
+      url,
+      method: method || 'GET',
+      headers,
+    };
+    const response = await axios(config);
+    if (response.status === 401) {
+      return { status: 401, message: 'Expired token' };
+    }
+    const jsonResp = response.data;
+    console.log('API response:', jsonResp);
+    if (jsonResp.status === 401) {
+      refreshAttempts += 1;
+      if (refreshAttempts === 2) {
+        refreshAttempts = 0;
+        return Promise.resolve(jsonResp);
+      }
+      return refreshTokenAndRecallAPI({ url, method });
+    }
+    return Promise.resolve(jsonResp);
+  } catch (error) {
+    console.log('API error:', error);
+    return Promise.reject(error);
+  }
 };
 
 export const refreshTokenAndRecallAPI = async ({url, method} : FetchParamsType) : Promise<unknown> => {

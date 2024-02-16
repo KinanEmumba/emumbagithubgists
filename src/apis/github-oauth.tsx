@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { githubCORSProxy, githubFullTokenURL } from "../const-urls";
 
 export const getTokenAPI = async ({
@@ -11,20 +12,21 @@ export const getTokenAPI = async ({
   const refreshURL = `${githubFullTokenURL}&grant_type=refresh_token&refresh_token=${refreshToken}`
   const apiURL = encodeURIComponent(code ? codeURL : refreshURL);
   const url = `${githubCORSProxy}/?${apiURL}`;
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json'
-    }
-  })
-  .then(resp =>resp.json())
-  .then(jsonResp => {
-    console.log('github token json resp is', jsonResp);
+
+  try {
+    const response = await axios.post(url, null, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const jsonResp = response.data;
+    console.log('GitHub token JSON response:', jsonResp);
+    
     sessionStorage.setItem('githubTokenObject', JSON.stringify(jsonResp));
-    return jsonResp
-  })
-  .catch(err => {
-    console.log('githuib error', err)
-    return err;
-  });
+    return jsonResp;
+  } catch (error) {
+    console.log('GitHub error:', error);
+    return error;
+  }
 }
