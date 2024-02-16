@@ -14,7 +14,9 @@ export const StyledHeaderView = styled('div')(() => `
   align-items: center;
   justify-content: space-between;
   background-color: #5acba1;
-  position: absolute;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `);
 
 export const RightAreaDiv = styled('span')(() => `

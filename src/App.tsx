@@ -21,9 +21,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <Header/>
-            <MainDiv>
+            {/* <MainDiv> */}
               <AppRoutes />
-            </MainDiv>
+            {/* </MainDiv> */}
           </QueryClientProvider>
         </ThemeProvider>
       </AuthContext.Provider>

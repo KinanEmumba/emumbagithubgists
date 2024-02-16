@@ -5,7 +5,7 @@ import { useGetPublicGists } from '../../apis/apis';
 import { ApiRespType } from '../../types';
 import GistTable from '../../components/gist-table/gist-table';
 import GistCards from '../../components/gist-cards/gist-cards';
-import PaginationHandler from '../../components/shared-components/pagination-handler';
+import PaginationHandler from './pagination-handler';
 import { AuthContext } from '../../App';
 import { StyledViewSelectionContainer, StyledVerticalDivider, StyledTableContainer } from './homepage-styles';
 

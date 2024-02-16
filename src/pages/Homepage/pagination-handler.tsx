@@ -1,18 +1,22 @@
 import styled from 'styled-components';
-import AppButton from './app-button';
+import AppButton from '../../components/shared-components/app-button';
 import EastIcon from '@mui/icons-material/East';
 import WestIcon from '@mui/icons-material/West';
 import { pageSize } from '../../const-urls';
-import { themeColor } from './app-theme';
+import { themeColor, themeColorLight } from '../../components/shared-components/app-theme';
 import { useEffect, useRef } from 'react';
 
 export const StyledPaginationContainer = styled('div')(() => `
-  width: 90vw;
-  margin: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px dotted ${themeColorLight};
+  background: white;
+  padding: 10px 30px;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
 `
 );
 
