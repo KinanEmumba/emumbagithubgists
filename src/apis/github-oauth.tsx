@@ -19,10 +19,8 @@ export const getTokenAPI = async ({
         Accept: 'application/json',
       },
     });
-
     const jsonResp = response.data;
     console.log('GitHub token JSON response:', jsonResp);
-    
     sessionStorage.setItem('githubTokenObject', JSON.stringify(jsonResp));
     return jsonResp;
   } catch (error) {

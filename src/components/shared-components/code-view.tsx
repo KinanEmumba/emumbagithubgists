@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import useFileFetcher from "./file-fetcher";
+import useFileFetcher from "../../apis/file-fetcher";
 import { useCallback } from "react";
+import { CircularProgress } from "@mui/material";
 
 export const StyledIndex = styled.span`
   color: grey;
@@ -37,24 +38,24 @@ const CodeView = ({
 }: {
   fileURI: string,
 }) => {
-  const {fileData} : {fileData: string} = useFileFetcher({fileURI});
+  const {fileData} : {fileData: string| undefined} = useFileFetcher({fileURI});
 
   const fileDataMaker = useCallback(() => {
-    const textArray = fileData.split('\n');
-    const cleanedTextArray = textArray.filter(line => line !== '');
-    return cleanedTextArray.map((line, index) => {
+    const textArray = fileData?.split('\n');
+    const cleanedTextArray = textArray?.filter(line => line !== '');
+    return cleanedTextArray?.map((line, index) => {
       return (
-        <CodeContainer key={index}>
+        <CodeContainer key={fileURI + index}>
           <StyledIndex>{index}</StyledIndex>
           <StyledCodeLine>{line}</StyledCodeLine>
         </CodeContainer>
       );
     });
-  }, [fileData])
+  }, [fileData, fileURI])
 
   return (
     <FlexColumn>
-      {fileDataMaker()}
+      {!fileData ? <CircularProgress /> : fileDataMaker()}
     </FlexColumn>
   )
 }

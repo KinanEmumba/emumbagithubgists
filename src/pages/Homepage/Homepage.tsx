@@ -2,12 +2,13 @@ import { useContext, useState } from 'react';
 import ListIcon from '@mui/icons-material/List';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useGetPublicGists } from '../../apis/apis';
-import { ApiRespType } from '../../types';
 import GistTable from '../../components/gist-table/gist-table';
 import GistCards from '../../components/gist-cards/gist-cards';
 import PaginationHandler from './pagination-handler';
 import { AuthContext } from '../../App';
 import { StyledViewSelectionContainer, StyledVerticalDivider, StyledTableContainer } from './homepage-styles';
+import { UseQueryResult } from '@tanstack/react-query';
+import { GistDataType } from '../../types';
 
 const Homepage = () => {
   const contextValue = useContext(AuthContext);
@@ -16,9 +17,9 @@ const Homepage = () => {
   const [tableView, setTableView] = useState(true);
   const {
     data,
-    loading: apiLoading,
-    error
-  } : ApiRespType = useGetPublicGists({page});
+    isPending: apiLoading,
+    error,
+  } : UseQueryResult<GistDataType[], Error> = useGetPublicGists({page});
   return (
     <>
       <StyledViewSelectionContainer>
@@ -35,10 +36,10 @@ const Homepage = () => {
         />
       </StyledViewSelectionContainer>
       <StyledTableContainer>
-        {data ? 
-          tableView ? <GistTable data={data} loading={apiLoading || loading} /> :
-          <GistCards data={data} loading={apiLoading || loading}/> :
-          error && error.message
+        {error && error.message || 
+          tableView ?
+            <GistTable data={data} loading={apiLoading || loading} /> :
+            <GistCards data={data} loading={apiLoading || loading}/>
         }
       </StyledTableContainer>
       <PaginationHandler page={page} onPageChange={(newPage) => setPage(newPage)}/>

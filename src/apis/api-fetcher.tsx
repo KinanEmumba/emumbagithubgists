@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
-import { ApiResponseErrorType, ApiHeadersType, FetchParamsType } from '../types';
-import { getTokenAPI } from './github-oauth';
+import axios, { AxiosRequestConfig } from "axios";
+import { ApiHeadersType, FetchParamsType } from "../types";
+import { getTokenAPI } from "./github-oauth";
 
 const headers: ApiHeadersType = {
 	'Accept': 'application/vnd.github+json',
@@ -48,38 +47,3 @@ export const refreshTokenAndRecallAPI = async ({url, method} : FetchParamsType) 
 	const newToken = await getTokenAPI({refreshToken: refresh_token});
 	return fetcher({url, method, token: newToken.access_token});
 }
-
-const useGistAPI = (props: FetchParamsType) => {
-	const [data, setData] = useState(null);
-	const [loading, setLoading] = useState<boolean>(false);
-	const [error, setError] = useState<ApiResponseErrorType>(null);
-	const {
-		url,
-		method,
-		token
-	} = props;
-	
-	useEffect(() => {
-		const gistAPI = () => {
-			setLoading(true);
-			setError(null);
-			fetcher({url, method, token})
-			.then(jsonResp => {
-				setData(jsonResp);
-				setLoading(false);
-			})
-			.catch(err => {
-				setError(err);
-				setLoading(false);
-			})
-		};
-		gistAPI();
-		
-	}, [method, token, url]);
-
-  return {
-		data, loading, error
-	};
-}
-
-export default useGistAPI;

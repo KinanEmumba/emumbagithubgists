@@ -1,11 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { githubGistsPageSize, githubPublicGistsBaseURL, githubUserURL } from "../const-urls";
-import useGistAPI, { fetcher } from "./api-hook";
+import { fetcher } from "./api-fetcher";
 
-export const useGetPublicGists = ({page} : {page: number}) => {
-  return useGistAPI({
-    url: `${githubPublicGistsBaseURL}${githubGistsPageSize}&page=${page}`,
-    method: 'GET'
-  });
+export const useGetPublicGists = ({ page }: { page: number }) => {
+  const url = `${githubPublicGistsBaseURL}${githubGistsPageSize}&page=${page}`;
+  return useQuery({queryKey: ['publicGists', {page}], queryFn: () => fetcher({ url, method: 'GET' }) });
 };
 
 export const getGithubUser = ({token} : {token?: string | null}) => {

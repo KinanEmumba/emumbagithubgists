@@ -25,24 +25,24 @@ const GistTable = ({
   data,
   loading,
 }: {
-  data: null | GistDataType[],
+  data: undefined | GistDataType[],
   loading?: boolean,
 }) => {
 
-  if (loading || !data || !data.length) return (
+  if (loading || !data) return (
     <LoaderArea>
       <CircularProgress />
     </LoaderArea>
   );
   return (
-    <TableContainer sx={{ width: '90vw' }}>
+    <TableContainer sx={{ width: '90vw',minHeight: '720px' }}>
       <Table aria-label="custom pagination table">
         <TableHead>
           <TableRow sx={{background: themeColorLight}}>
             {TableCols.map((col, index) => <StyledTableCell key={index}>{col}</StyledTableCell>)}
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ height: '720px'}}>
           {data.map((row) => (
             <TableRow key={row.id}>
               <StyledTableCell component="th" scope="row">

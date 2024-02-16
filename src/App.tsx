@@ -6,7 +6,6 @@ import AppRoutes from './app-routes';
 import useAppUserContext from './components/shared-components/app-user-context';
 import { theme } from './components/shared-components/app-theme';
 import Header from './components/header/header';
-import { MainDiv } from './components/shared-components/styled-main-view';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const AuthContext = createContext<SharedContextType>(null);
@@ -21,9 +20,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <Header/>
-            {/* <MainDiv> */}
-              <AppRoutes />
-            {/* </MainDiv> */}
+            <AppRoutes />
           </QueryClientProvider>
         </ThemeProvider>
       </AuthContext.Provider>

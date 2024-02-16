@@ -8,7 +8,7 @@ const GistCards = ({
   data,
   loading,
 }: {
-  data: null | GistDataType[],
+  data: undefined | GistDataType[],
   loading?: boolean,
 }) => {
   if (loading || !data || !data.length) return (
