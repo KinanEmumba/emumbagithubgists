@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { FetchParamsType } from "../types";
 import { getTokenAPI } from "./github-oauth";
 
@@ -24,22 +24,21 @@ export const fetcher = async ({url, method} : FetchParamsType) => {
 	try {
     console.log(`using method ${method}\nand headers ${JSON.stringify(apiCallHeaders)}\ncalling API ${url}`);
     const response = await fetcherInstance(url);
-    if (response.status === 401) {
-      return { status: 401, message: 'Expired token' };
-    }
+    console.log('API response:', response);
     const jsonResp = response.data;
-    console.log('API response:', jsonResp);
-    if (jsonResp.status === 401) {
-      refreshAttempts += 1;
-      if (refreshAttempts === 2) {
-        refreshAttempts = 0;
-        return Promise.resolve(jsonResp);
-      }
-      return refreshTokenAndRecallAPI({ url, method });
-    }
     return Promise.resolve(jsonResp);
   } catch (error) {
     console.log('API error:', error);
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        refreshAttempts += 1;
+        if (refreshAttempts === 2) {
+          refreshAttempts = 0;
+          return Promise.resolve(error);
+        }
+        return refreshTokenAndRecallAPI({ url, method });
+      }
+    }
     return Promise.reject(error);
   }
 };

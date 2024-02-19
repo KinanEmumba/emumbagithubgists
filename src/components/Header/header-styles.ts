@@ -32,8 +32,10 @@ export const StyledLogoText = styled('span')(() => `
   font-weight: bold;
   padding-left: 5vw;
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
   &:hover {
     opacity: 75%;
+    transform: scale(1.1);
   }
 `
 );

@@ -3,6 +3,13 @@ import { githubGistsBaseURL, githubGistsPageSize, githubPublicGistsBaseURL, gith
 import { fetcher } from "./api-fetcher";
 import { GistDataType } from "../types";
 
+export const getGithubUser = () => {
+  return fetcher({
+    url: githubUserURL,
+    method: 'GET',
+  });
+};
+
 export const useGetPublicGists = ({ page }: { page: number }) => {
   const url = `${githubPublicGistsBaseURL}${githubGistsPageSize}&page=${page}`;
   return useQuery<GistDataType[], Error>({
@@ -17,12 +24,5 @@ export const useGetGistsByID = ({ id }: { id: string | number }) => {
     queryKey: ['singleGist', {id}],
     queryFn: () => fetcher({ url, method: 'GET' }),
     enabled: !!id && id !== '',
-  });
-};
-
-export const getGithubUser = () => {
-  return fetcher({
-    url: githubUserURL,
-    method: 'GET',
   });
 };

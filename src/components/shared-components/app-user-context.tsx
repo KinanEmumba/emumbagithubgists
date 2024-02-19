@@ -9,7 +9,13 @@ const useAppUserContext = () => {
   const params = new URLSearchParams(search);
   const githubCode = params.get('code');
   const [code] = useState(githubCode);
-  const [userToken, setUserToken] = useState<TokenType>(null);
+
+  const storedToken = sessionStorage.getItem('githubTokenObject');
+  console.log('storedToken', storedToken);
+  const [userToken, setUserToken] = useState<TokenType>(
+    storedToken ? JSON.parse(storedToken) : null
+  );
+
   const [user, setUser] = useState<UserType>(null);
   const [loading, setLoading] = useState(!!githubCode);
 
@@ -22,19 +28,12 @@ const useAppUserContext = () => {
     setUserToken(null);
     gotoHome();
   };
-
-  
-  useEffect(() => {
-    const storedToken = sessionStorage.getItem('githubTokenObject');
-    console.log('storedToken', storedToken);
-    if (storedToken) setUserToken(JSON.parse(storedToken));
-  }, []);
   
   useEffect(() => {
     const getUser = async () => {
       try {
         setLoading(true);
-        const user = await getGithubUser({token: userToken?.access_token})
+        const user = await getGithubUser();
         setLoading(false);
         setUser(user);
       } catch (err) {

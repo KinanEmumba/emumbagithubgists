@@ -16,6 +16,7 @@ export const StyledLoginButton = styled.span<StyledLoginButtonProps>`
   justify-content: center;
   &:hover {
     opacity: 0.75;
+    transition: all 0.25s ease-in-out;
   };
 `;
 
