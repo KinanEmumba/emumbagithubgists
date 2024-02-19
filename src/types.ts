@@ -1,6 +1,7 @@
 export type FetchParamsType = {
   url: string
 	method?: string
+	body?: object
 };
 
 export type TokenType = null | {
@@ -15,6 +16,27 @@ export type UserType = null | {
   email?: string,
   login?: string,
   html_url?: string,
+};
+
+export type OwnerUserType = null | {
+  login?: string
+  id?: number
+  node_id?: string
+  avatar_url?: string
+  gravatar_id?: string
+  url?: string
+  html_url?: string
+  followers_url?: string
+  following_url?: string
+  gists_url?: string
+  starred_url?: string
+  subscriptions_url?: string
+  organizations_url?: string
+  repos_url?: string
+  events_url?: string
+  received_events_url?: string
+  type?: string
+  site_admin?: boolean
 };
 
 export type SharedContextType = null | {
@@ -51,24 +73,5 @@ export type GistDataType = {
   comments?: number
   user?: UserType
   comments_url?: string
-  owner?: {
-    login?: string
-    id?: number
-    node_id?: string
-    avatar_url?: string
-    gravatar_id?: string
-    url?: string
-    html_url?: string
-    followers_url?: string
-    following_url?: string
-    gists_url?: string
-    starred_url?: string
-    subscriptions_url?: string
-    organizations_url?: string
-    repos_url?: string
-    events_url?: string
-    received_events_url?: string
-    type?: string
-    site_admin?: boolean
-  }
+  owner?: OwnerUserType
 };

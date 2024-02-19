@@ -20,16 +20,19 @@ const HeaderUserAvatar = () => {
   };
 
   const yourGists = () => {
-    navigate('/usergists')
+    handleClose();
+    navigate('/usergists', {state: {user, starred: false}});
   };
   
   const starredGists = () => {
     handleClose();
-
+    navigate('/usergists', {state: {user, starred: true}});
+    
   };
   
-  const help = () => {
+  const createGist = () => {
     handleClose();
+    navigate('/create');
 
   };
 
@@ -58,8 +61,8 @@ const HeaderUserAvatar = () => {
         <MenuItem>Signed in as {user?.name || user?.login}</MenuItem>
         <Divider />
         <MenuItem onClick={() => yourGists()}>Your Gists</MenuItem>
-        <MenuItem onClick={() => starredGists()}>Starred gists</MenuItem>
-        <MenuItem onClick={help}>Help</MenuItem>
+        <MenuItem onClick={() => starredGists()}>Starred Gists</MenuItem>
+        <MenuItem onClick={()=> createGist()}>Create Gist</MenuItem>
         <Divider />
         <MenuItem onClick={() => githubProfile()}>Your Githuib profile</MenuItem>
         <MenuItem onClick={() => signOut()}>Signout</MenuItem>

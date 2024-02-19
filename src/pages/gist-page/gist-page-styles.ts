@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { iceBlue } from "../../components/shared-components/app-theme";
 
 export const MainDiv = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ export const MainDiv = styled.div`
 `;
   
   export const FileInfoArea = styled.div`
-  width: 90vw;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -20,7 +20,7 @@ export const MainDiv = styled.div`
 `;
 
 export const GistOptions = styled.div`
-  width: 90vw;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

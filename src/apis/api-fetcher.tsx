@@ -6,7 +6,7 @@ let refreshAttempts = 0;
 let apiCallHeaders = {};
 const fetcherInstance = axios.create();
 
-export const fetcher = async ({url, method} : FetchParamsType) => {
+export const fetcher = async ({url, method, body} : FetchParamsType) => {
   fetcherInstance.interceptors.request.use(
   (config) => {
     config.headers.Accept = 'application/vnd.github+json';
@@ -19,14 +19,24 @@ export const fetcher = async ({url, method} : FetchParamsType) => {
     }
     apiCallHeaders = config.headers;
     config.method = method || 'GET';
+    if (body) config.data = body;
     return config;
   });
 	try {
-    console.log(`using method ${method}\nand headers ${JSON.stringify(apiCallHeaders)}\ncalling API ${url}`);
+    
+    console.log(`
+    using method ${method}
+    and headers
+    ${JSON.stringify(apiCallHeaders)}
+    and body
+    ${JSON.stringify(body || {})}
+    calling API ${url}`);
+
     const response = await fetcherInstance(url);
     console.log('API response:', response);
     const jsonResp = response.data;
     return Promise.resolve(jsonResp);
+    
   } catch (error) {
     console.log('API error:', error);
     if (error instanceof AxiosError) {
@@ -36,16 +46,16 @@ export const fetcher = async ({url, method} : FetchParamsType) => {
           refreshAttempts = 0;
           return Promise.resolve(error);
         }
-        return refreshTokenAndRecallAPI({ url, method });
+        return refreshTokenAndRecallAPI({ url, method, body });
       }
     }
     return Promise.reject(error);
   }
 };
 
-export const refreshTokenAndRecallAPI = async ({url, method} : FetchParamsType) : Promise<unknown> => {
+export const refreshTokenAndRecallAPI = async ({url, method, body} : FetchParamsType) : Promise<unknown> => {
 	const storedToken = await sessionStorage.getItem('githubTokenObject');
 	const { refresh_token } = storedToken? JSON.parse(storedToken) : null;
 	await getTokenAPI({refreshToken: refresh_token});
-	return fetcher({url, method});
+	return fetcher({url, method, body});
 }

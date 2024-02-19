@@ -23,7 +23,11 @@ const GistSingleCard = ({
   
   return (
     <Card sx={{ width: '25vw', margin: 1}} onClick={()=> openGist(row)}>
-      <CardContent sx={{ height: '25vh' }}>
+      <CardContent sx={{
+        height: '25vh',
+        paddingTop: '0px',
+        paddingBottom: '0px'
+      }}>
         <CodeView fileURI={fileURI} />
       </CardContent>
       <Divider />

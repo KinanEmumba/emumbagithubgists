@@ -11,7 +11,6 @@ const useAppUserContext = () => {
   const [code] = useState(githubCode);
 
   const storedToken = sessionStorage.getItem('githubTokenObject');
-  console.log('storedToken', storedToken);
   const [userToken, setUserToken] = useState<TokenType>(
     storedToken ? JSON.parse(storedToken) : null
   );
@@ -47,8 +46,7 @@ const useAppUserContext = () => {
 
   useEffect(() => {
     const getToken = async () => {
-      const token = await getTokenAPI({code});
-      console.log('got token', token);
+      await getTokenAPI({code});
       gotoHome();
     }
     if (code) getToken();

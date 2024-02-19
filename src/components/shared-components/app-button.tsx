@@ -26,7 +26,7 @@ const AppButton = ({
   colored,
 }:{
   onClick: () => void,
-  buttonText: ReactNode,
+  buttonText: ReactNode | string,
   colored?: boolean
 }) => {
   return (
