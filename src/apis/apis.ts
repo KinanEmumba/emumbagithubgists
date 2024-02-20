@@ -56,7 +56,7 @@ export const useStarGist = ({ gistID }: { gistID: string | undefined }) => {
 export const useUnstarGist = ({ gistID }: { gistID: string | undefined }) => {
   const url = `${githubGistsBaseURL}/${gistID}/star`;
   return useQuery<GistDataType[], Error>({
-    queryKey: ['starGist', {gistID}],
+    queryKey: ['unstarGist', {gistID}],
     queryFn: () => fetcher({ url, method: 'DELETE' }),
     enabled: !!gistID && gistID !== '',
   });
@@ -65,15 +65,34 @@ export const useUnstarGist = ({ gistID }: { gistID: string | undefined }) => {
 export const useCreateGist = ({
   description,
   files,
+  onCreation
 }: {
   description: string,
   files: object,
+  onCreation: () => void
 }) => {
   const url = `${githubGistsBaseURL}`;
   const body = {description, files};
   const method = 'POST';
   return useMutation<GistDataType[], Error>({
     mutationKey: ['createGist'],
-    mutationFn: () => fetcher({ url, method, body })
+    mutationFn: () => fetcher({ url, method, body }),
+    onSuccess: onCreation
+  });
+};
+
+export const useDeleteGist = ({
+  id,
+  onDeletion
+} : {
+  id: string,
+  onDeletion: () => void
+}) => {
+  const url = `${githubGistsBaseURL}/${id}`;
+  const method = 'DELETE';
+  return useMutation<GistDataType[], Error>({
+    mutationKey: ['deleteGist'],
+    mutationFn: () => fetcher({ url, method }),
+    onSuccess: onDeletion
   });
 };

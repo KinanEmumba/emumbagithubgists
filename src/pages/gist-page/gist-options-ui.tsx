@@ -8,7 +8,6 @@ import { OwnerUserType } from '../../types';
 import { useContext } from 'react';
 import { AuthContext } from '../../App';
 
-
 const GistOptions = ({
   owner,
   onEdit,
@@ -17,10 +16,10 @@ const GistOptions = ({
   onFork,
 } : {
   owner?: OwnerUserType,
-  onEdit?: () => void,
-  onDelete?: () => void,
-  onStar?: () => void,
-  onFork?: () => void,
+  onEdit?: (e: React.MouseEvent) => void,
+  onDelete?: (e: React.MouseEvent) => void,
+  onStar?: (e: React.MouseEvent) => void,
+  onFork?: (e: React.MouseEvent) => void,
 }) => {
   const contextValue = useContext(AuthContext);
   const user = contextValue?.user;
@@ -28,10 +27,10 @@ const GistOptions = ({
   
   return (
     <StyledGistOptions>
-      {isOwner && <OptionContainer onClick={() => onEdit && onEdit()}><CreateIcon /> Edit </OptionContainer>}
-      {isOwner && <OptionContainer onClick={() => onDelete && onDelete()}><DeleteForeverIcon /> Delete</OptionContainer>}
-      <OptionContainer onClick={() => onStar && onStar()}>{owner?.starred_url ? <StarIcon/> : <StarBorderIcon/>} Star</OptionContainer>
-      <OptionContainer onClick={() => onFork && onFork()}><ForkRightIcon /> Fork</OptionContainer>
+      {isOwner && <OptionContainer onClick={(e) => onEdit && onEdit(e)}><CreateIcon /> Edit </OptionContainer>}
+      {isOwner && <OptionContainer onClick={(e) => onDelete && onDelete(e)}><DeleteForeverIcon /> Delete</OptionContainer>}
+      <OptionContainer onClick={(e) => onStar && onStar(e)}>{owner?.starred_url ? <StarIcon/> : <StarBorderIcon/>} Star</OptionContainer>
+      <OptionContainer onClick={(e) => onFork && onFork(e)}><ForkRightIcon /> Fork</OptionContainer>
     </StyledGistOptions>
   )
 }

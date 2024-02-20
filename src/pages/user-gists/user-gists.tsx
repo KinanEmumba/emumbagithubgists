@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CircularProgress, Switch } from "@mui/material";
 import { GistDataType, UserType } from "../../types";
 import { useGetStarredGists, useGetUserGists } from "../../apis/apis";
@@ -18,9 +18,7 @@ import {
 
 const Usergists = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const {user, starred} : {user: UserType, starred: boolean} = location.state;
-  console.log('starred', starred);
   const [enableUserGists, setEnableUserGists] = useState(!starred);
   const {isLoading: userLoading, data: userData, error: userError} = useGetUserGists({username: user?.login});
   const {isLoading: starLoading, data: starData, error: starError} = useGetStarredGists();
@@ -30,10 +28,6 @@ const Usergists = () => {
   const error = enableUserGists? userError : starError;
 
   useEffect(() => setEnableUserGists(!starred), [starred]);
-  
-  const openGist = (gist: GistDataType) => {
-    navigate('/gist', {state: {gist}});
-  };
 
   return (
     <UserGistsMainDiv>
@@ -52,8 +46,8 @@ const Usergists = () => {
         <StyledUserName>{enableUserGists ? 'User Gists' : 'Starred Gists'}</StyledUserName>
         {isLoading && <CircularProgress />}
         {data ?
-          data.map((gist: GistDataType) => <GistListContainer key={gist.id} onClick={() => openGist(gist)}>
-            <GistPage gistProp={gist} />
+          data.map((gist: GistDataType) => <GistListContainer key={gist.id}>
+            <GistPage gistProp={gist} list={true} user={user}/>
           </GistListContainer>) :
           error?.message
         }

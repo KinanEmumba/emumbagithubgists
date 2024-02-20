@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { useCreateGist } from "../../apis/apis";
 import {
   CreateGistsButtonsContainer,
@@ -9,18 +11,27 @@ import {
   LoaderContainer,
   StyledInputField
 } from "./create-gists-styles";
+import { AuthContext } from "../../App";
 
 const CreateGist = () => {
+  const contextValue = useContext(AuthContext);
+  const user = contextValue?.user;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [description, setDescription] = useState('');
   const [fileName, setFileName] = useState('');
   const [fileData, setFileData] = useState('');
 
+  const onCreation = async () => {
+    await queryClient.invalidateQueries({ queryKey: ['userGists', 'starredGists'] });
+    navigate('/usergists', {state: {user, starred: false}})
+  };
+
   const createGist = useCreateGist({
     description: description,
-    files: { [fileName]: {content: fileData} }
+    files: { [fileName]: {content: fileData} },
+    onCreation: onCreation
   });
-
-  console.log('createGist.data', createGist.data);
 
   const callMutation = async () => {
     createGist.mutate();
