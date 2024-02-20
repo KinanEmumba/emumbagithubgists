@@ -28,7 +28,7 @@ export const fetcher = async ({url, method, body} : FetchParamsType) => {
   } catch (error) {
     console.log('API error:', error);
     if (error instanceof AxiosError) {
-      if (error.response?.status === 401) {
+      if (error.response?.status === 401 && error.code !== "ERR_BAD_REQUEST") {
         refreshAttempts += 1;
         if (refreshAttempts === 2) {
           refreshAttempts = 0;

@@ -30,3 +30,8 @@ export const StyledTableContainer = styled('div')(() => `
   justify-content: center;
 `
 );
+
+export const ErrorMessage = styled('div')(() => `
+  color: black;
+`
+);

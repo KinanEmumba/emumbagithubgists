@@ -6,7 +6,7 @@ import GistTable from '../../components/gist-table/gist-table';
 import GistCards from '../../components/gist-cards/gist-cards';
 import PaginationHandler from './pagination-handler';
 import { AuthContext } from '../../App';
-import { StyledViewSelectionContainer, StyledVerticalDivider, StyledTableContainer } from './homepage-styles';
+import { StyledViewSelectionContainer, StyledVerticalDivider, StyledTableContainer, ErrorMessage } from './homepage-styles';
 import { UseQueryResult } from '@tanstack/react-query';
 import { GistDataType } from '../../types';
 
@@ -17,7 +17,7 @@ const Homepage = () => {
   const [tableView, setTableView] = useState(true);
   const {
     data,
-    isPending: apiLoading,
+    isLoading: apiLoading,
     error,
   } : UseQueryResult<GistDataType[], Error> = useGetPublicGists({page});
   return (
@@ -36,7 +36,7 @@ const Homepage = () => {
         />
       </StyledViewSelectionContainer>
       <StyledTableContainer>
-        {error && error.message || 
+        {error?.message && <ErrorMessage>{error.message}</ErrorMessage> || 
           tableView ?
             <GistTable data={data} loading={apiLoading || loading} /> :
             <GistCards data={data} loading={apiLoading || loading}/>
