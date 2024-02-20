@@ -70,9 +70,10 @@ export const useCreateGist = ({
   files: object,
 }) => {
   const url = `${githubGistsBaseURL}`;
-  const body = {description, files, public: false};
+  const body = {description, files};
+  const method = 'POST';
   return useMutation<GistDataType[], Error>({
     mutationKey: ['createGist'],
-    mutationFn: () => fetcher({ url, method: 'POST', body })
+    mutationFn: () => fetcher({ url, method, body })
   });
 };

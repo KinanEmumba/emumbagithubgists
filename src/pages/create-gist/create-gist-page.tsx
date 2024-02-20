@@ -9,7 +9,6 @@ import {
   LoaderContainer,
   StyledInputField
 } from "./create-gists-styles";
-import { githubGistsBaseURL } from "../../const-urls";
 
 const CreateGist = () => {
   const [description, setDescription] = useState('');
@@ -24,26 +23,7 @@ const CreateGist = () => {
   console.log('createGist.data', createGist.data);
 
   const callMutation = async () => {
-    // createGist.mutate();
-    async function postData(url = "", data = {}) {
-      const access_token = 'ghu_I60xzCSIfzJLuustUFkioBCvJfyL7c3Io2bP';
-      const response = await fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-          Accept: 'application/vnd.github+json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-      });
-      return response.json(); // parses JSON response into native JavaScript objects
-    }
-    postData(githubGistsBaseURL, {
-      description: description,
-      files: {[fileName] : {content: fileData}}
-    }).then((data) => {
-      console.log('FETCH RESPONSE', data);
-    });
+    createGist.mutate();
   }
   
   const addFile = () => {
