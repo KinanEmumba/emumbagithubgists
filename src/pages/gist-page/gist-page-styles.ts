@@ -31,7 +31,7 @@ export const GistOptions = styled.div`
 export const StyledGistOptions = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-center;
   align-items: center;
   color: ${iceBlue};
   fontSize: 12px;
