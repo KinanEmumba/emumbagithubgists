@@ -47,7 +47,7 @@ const Usergists = () => {
         {isLoading && <CircularProgress />}
         {data ?
           data.map((gist: GistDataType) => <GistListContainer key={gist.id}>
-            <GistPage gistProp={gist} list={true} user={user}/>
+            <GistPage gistProp={gist} list={true}/>
           </GistListContainer>) :
           error?.message
         }

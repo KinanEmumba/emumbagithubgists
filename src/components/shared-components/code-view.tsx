@@ -34,9 +34,9 @@ export const CodeContainer = styled.div`
 
 
 const CodeView = ({
-  fileURI
+  fileURI = ''
 }: {
-  fileURI: string,
+  fileURI: string | undefined,
 }) => {
   const {fileData} : {fileData: string| undefined} = useFileFetcher({fileURI});
 

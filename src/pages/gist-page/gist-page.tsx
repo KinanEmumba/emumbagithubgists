@@ -10,6 +10,7 @@ import CodeView from '../../components/shared-components/code-view';
 import { GistDataType } from '../../types';
 import { useDeleteGist } from '../../apis/apis';
 import { AuthContext } from '../../App';
+import { gistFileURL } from '../../components/shared-components/utils';
 
 const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) => {
   const contextValue = useContext(AuthContext);
@@ -26,12 +27,6 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
   };
   const deleteGist = useDeleteGist({id: localGist && localGist.id || '', onDeletion});
 
-  const filesObject = localGist.files;
-  const fileArray = Object.keys(filesObject);
-  const firstKey = fileArray[0];
-  const firstObject = filesObject[firstKey];
-  const fileURI = firstObject.raw_url;
-
   const onDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     deleteGist.mutate();
@@ -39,6 +34,7 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
   
   const onEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
+    navigate('/create', {state: {gist: localGist}});
   }
   
   const onStar = (e: React.MouseEvent) => {
@@ -72,7 +68,7 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
         <CardHeader title = {
             <CardTitleContainer>
               <CodeIcon sx={{marginRight: '10px'}}/>
-              {firstObject.filename}
+              {gistFileURL(localGist).filename}
             </CardTitleContainer>
         }/>
         <CardContent sx={{
@@ -82,7 +78,7 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
             paddingBottom: '0px'
         }}>
           {deleteGist.isPending && <CircularProgress />}
-          <CodeView fileURI={fileURI} />
+          <CodeView fileURI={gistFileURL(localGist).fileURI} />
         </CardContent>
         <Divider />
       </Card>

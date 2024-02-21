@@ -2,9 +2,9 @@ import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 
 const useFileFetcher = ({
-  fileURI
+  fileURI = ''
 }: {
-  fileURI: string;
+  fileURI: string | undefined;
 }) => {
   const { data: fileData, error } = useQuery<string, Error>({
     queryKey: ['fileData', {fileURI}],

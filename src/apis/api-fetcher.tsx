@@ -17,7 +17,7 @@ export const fetcher = async ({url, method, body} : FetchParamsType) => {
   try {
     switch (method) {
       case 'POST': response = await axios.post(url, body, {headers}); break;
-      case 'PUT': response = await axios.put(url, body, {headers}); break;
+      case 'PATCH': response = await axios.patch(url, body, {headers}); break;
       case 'DELETE': response = await axios.delete(url, {headers}); break;
       default: response = await axios.get(url, {headers});
     }

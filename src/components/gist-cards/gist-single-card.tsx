@@ -3,6 +3,7 @@ import { GistDataType } from '../../types';
 import CodeView from '../shared-components/code-view';
 import GistUserInfo from '../shared-components/gist-user-info';
 import { useNavigate } from 'react-router-dom';
+import { gistFileURL } from '../shared-components/utils';
 
 const GistSingleCard = ({
   row
@@ -10,12 +11,6 @@ const GistSingleCard = ({
   row: GistDataType,
 }) => {
   const navigate = useNavigate();
-  
-  const filesObject = row.files;
-  const fileArray = Object.keys(filesObject);
-  const firstKey = fileArray[0];
-  const firstObject = filesObject[firstKey];
-  const fileURI = firstObject.raw_url;
 
   const openGist = (gist: GistDataType) => {
     navigate('/gist', {state: {gist}});
@@ -28,7 +23,7 @@ const GistSingleCard = ({
         paddingTop: '0px',
         paddingBottom: '0px'
       }}>
-        <CodeView fileURI={fileURI} />
+        <CodeView fileURI={gistFileURL(row).fileURI} />
       </CardContent>
       <Divider />
       <CardActions sx={{ minHeight: 100, maxHeight: 100 }}>

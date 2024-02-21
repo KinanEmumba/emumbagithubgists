@@ -81,6 +81,27 @@ export const useCreateGist = ({
   });
 };
 
+export const useUpdateGist = ({
+  gistID,
+  description,
+  files,
+  onCreation,
+}: {
+  gistID: string | undefined,
+  description: string,
+  files: object,
+  onCreation: () => void
+}) => {
+  const url = `${githubGistsBaseURL}/${gistID}`;
+  const body = {description, files};
+  const method = 'PATCH';
+  return useMutation<GistDataType[], Error>({
+    mutationKey: ['editGist'],
+    mutationFn: () => fetcher({ url, method, body }),
+    onSuccess: onCreation
+  });
+};
+
 export const useDeleteGist = ({
   id,
   onDeletion
