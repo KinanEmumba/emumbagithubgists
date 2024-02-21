@@ -76,7 +76,7 @@ const CreateGist = () => {
 
   return (
     <CreateGistsMainDiv>
-      {createGist.isPending && <LoaderContainer>
+      {(createGist.isPending || updateGist.isPending) && <LoaderContainer>
         <CircularProgress />
       </LoaderContainer>}
       <CreateGistsInputsContainer>

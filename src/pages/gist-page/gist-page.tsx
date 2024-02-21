@@ -15,12 +15,13 @@ import { gistFileURL } from '../../components/shared-components/utils';
 const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) => {
   const contextValue = useContext(AuthContext);
   const user = contextValue?.user;
-
+  
   const location = useLocation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const {gist} : {gist: GistDataType} = location.state;
   const localGist = gistProp || gist;
+
   const onDeletion = async () => {
     await queryClient.invalidateQueries({ queryKey: ['userGists', 'starredGists'] });
     navigate('/usergists', {state: {user, starred: false}});
@@ -50,9 +51,9 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
   const openGist = () => {
     navigate('/gist', {state: {gist: localGist}});
   };
-  
 
-  return (
+  const MainCodeView = ({filename, fileURI} : {fileURI?: string, filename?: string}) => {
+    return (
     <MainDiv onClick={() => list && openGist()}>
       <FileInfoArea>
         <GistUserInfo row={localGist}/>
@@ -64,11 +65,11 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
           onFork={e => onFork(e)}
         />
       </FileInfoArea>
-      <Card sx={{ width: '75%', alignSelf: 'center'}}>
+      <Card sx={{ width: '75%', alignSelf: 'center', marginBottom: '20px'}}>
         <CardHeader title = {
             <CardTitleContainer>
               <CodeIcon sx={{marginRight: '10px'}}/>
-              {gistFileURL(localGist).filename}
+              {filename}
             </CardTitleContainer>
         }/>
         <CardContent sx={{
@@ -78,12 +79,22 @@ const GistPage = ({gistProp, list} : {gistProp?: GistDataType, list?: boolean}) 
             paddingBottom: '0px'
         }}>
           {deleteGist.isPending && <CircularProgress />}
-          <CodeView fileURI={gistFileURL(localGist).fileURI} />
+          <CodeView fileURI={fileURI} />
         </CardContent>
         <Divider />
       </Card>
     </MainDiv>
-  )
+    )
+  };
+
+  if (list) return <MainCodeView fileURI={gistFileURL(localGist).fileURI} filename={gistFileURL(localGist).filename}/>;
+  return <>{Object.keys(localGist.files).map(file =>
+    <MainCodeView
+      key={file}
+      filename={localGist.files[file].filename}
+      fileURI={localGist.files[file].raw_url}
+    />)}
+  </>
 }
 
 export default GistPage;

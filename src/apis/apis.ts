@@ -96,7 +96,7 @@ export const useUpdateGist = ({
   const body = {description, files};
   const method = 'PATCH';
   return useMutation<GistDataType[], Error>({
-    mutationKey: ['editGist'],
+    mutationKey: ['editGist', {gistID}],
     mutationFn: () => fetcher({ url, method, body }),
     onSuccess: onCreation
   });
